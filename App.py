@@ -12,5 +12,5 @@ class Pet :
 
 
 
-class Receptionist :
+class Owner:
     def __init__(self):
