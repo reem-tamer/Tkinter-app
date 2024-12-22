@@ -72,5 +72,3 @@ class Receptionist:
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-#hi
-#hi nor
