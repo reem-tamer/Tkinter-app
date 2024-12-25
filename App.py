@@ -32,8 +32,8 @@ class Owner:
         owner_dict= {"owner_name":self.owner_name, "pets": [pet.pet_turn_dict() for pet in self.pets]}
         return owner_dict
 class Vet:
-    def __init__(self,name,available_appointments):
-        self.name=name
+    def __init__(self,vet_name,available_appointments):
+        self.vet_name=vet_name
         self.available_appointments=available_appointments
         #self.appointments=[]
 
@@ -53,22 +53,57 @@ class Inventory:
     def __init__(self):
         self.inventory={"Food":100,"Grooming tools":50,"Medications":150,"Pet toys":30,"Pet clothes":20}
 
-    def update_inv(self,item,sales):
-        if sales<self.inventory:
-            self.inventory[item]-=sales
-        else:
-            messagebox.showerror("Error","Invalid sales amount, please revise")
 
     def display_inv(self): #put the key and value in s atring format in a list then turn the list into a string using .join
         display_inv= "\n".join([f"{k}:{v}" for k,v in self.inventory.items()])
         messagebox.showinfo("Available Inventory",display_inv) # put the .join string in a message box
+        print(display_inv)
+    def update_inv(self,item,sales):
+
+        for key,value in self.inventory.items():
+            if item==key:
+                if sales<value:
+                    self.inventory[item]-=sales
+                else:
+                    messagebox.showerror("Error","Invalid sales amount, please revise")
 
 
 class Receptionist:
-    pass
+    def __init__(self):
+        self.appointments=[]
+        self.inventory=Inventory()
+
+    def book_appointment(self,pet,owner,vet,timeslot):
+        appointment= Appointment(pet,owner,vet,timeslot)
+        self.appointments.append(appointment) #appends the instance of class appointment in the appointments list
+        vet.available_appointments.remove(timeslot) #removes the taken timeslot from the vets available time slots
+        messagebox.showinfo("Sucessful booking",f"Appointment booked for {pet.pet_name} with {vet.vet_name} at {timeslot} ")
+
+    def view_appointment (self): #so the receptionist is able to view the appointments everyday
+        if not self.appointments: # if we have no appointments
+            messagebox.showinfo("Appointment Details","No appointments booked")
+        else:
+            appointment_view="\n".join([f'{appointment.pet.pet_name } with {appointment.vet.vet_name} at {appointment.timeslot}'  for appointment in self.appointments])
+            messagebox.showinfo("Appointment Details", appointment_view)
 
 
 
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
+        self.geometry("800x600") # no instance for the window
+        self.title("Fluffy Paws Clinic and Shop")
+        self.vets=[Vet("DR. Ahmed Anwar", ["6:00pm","7:00pm","8:00pm"]), Vet("DR. Alex Johns", ["6:00pm","7:00pm","8:00pm"])]
+        self.owners=[]
+        self.load_data()
+        self.main_menu()
+
+    def main_menu(self):
+        pass
+
+
+
+
+
+
+
