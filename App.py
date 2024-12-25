@@ -182,7 +182,7 @@ class App(tk.Tk):
         self.vets = [Vet("DR. Ahmed Anwar", ["6:00pm", "7:00pm", "8:00pm"]),
                      Vet("DR. Alex Johns", ["6:00pm", "7:00pm", "8:00pm"])]
         self.owners = []
-        # self.load_data()
+        self.owner_load_data()
         self.main_menu()
 
     def main_menu(self):
@@ -199,7 +199,10 @@ class App(tk.Tk):
             json.dump(owner_data,file, indent=4)
 
     def owner_load_data(self):
-        pass
+        with open("owner_data.json","r")as file:
+            owner_data=json.load(file)
+            self.owners=  [ Owner.get_dict(owner) for owner in owner_data["owners"]]  #looping over the dictionary we have of the json file
+            # and converting it into an object using the static method get_dict in the owner class
 
 if __name__ == "__main__":
     app = App()
