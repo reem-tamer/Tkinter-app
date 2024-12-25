@@ -138,14 +138,33 @@ class pet_registration(tk.Toplevel):
         vaccination_record = self.record_box.get().split(",")
         species = self.species_box.get()
         pet_age = self.pet_box.get()
-        if isinstance(pet_age, int)== True:
-            messagebox.showerror("Input Error", "Please, enter an integer")
+
+        try:
+            pet_age = int(self.age_box.get())
+        except ValueError:
+            messagebox.showerror("Input Error", "Please enter a valid integer for the pet's age.")
+            return
 
 
-        for x in self.master.owners:
-            if x != owner_name:  # check if the owner is in the list
-                owner = Owner(owner_name)  # if its not it takes the name and makes and instance of it
-                self.master.owners.append(owner)  # then appends it to the class
+        # for x in self.master.owners:
+        #     owner = None
+        #     if x.owner_name == owner_name:
+        #         owner = x
+        #         break
+        #     if x != owner_name:  # check if the owner is in the list
+        #         owner = Owner(owner_name)  # if its not it takes the name and makes and instance of it
+        #         self.master.owners.append(owner)  # then appends it to the class
+        owner = None
+        for existing_owner in self.master.owners:
+            if existing_owner.owner_name == owner_name:
+                owner = existing_owner
+                break
+
+        # If no owner was found, create a new one
+        if owner is None:
+            owner = Owner(owner_name)
+            self.master.owners.append(owner)
+
 
         pet = Pet(pet_name, pet_age, species, vaccination_record)
         owner.add_pet(pet)
