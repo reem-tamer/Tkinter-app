@@ -87,6 +87,48 @@ class Receptionist:
             messagebox.showinfo("Appointment Details", appointment_view)
 
 
+class pet_registration(tk.Toplevel):
+    def __init__(self,master):
+        super.__init__(master)
+        self.title("Pet Registration")
+        self.geometry("800x600")
+        self.master=master
+
+        ownerlabel = tk.Label(self, text = "Owner Name: ")
+        ownerlabel.pack(pady = 5)
+        self.owner_box = tk.Entry(self)
+        self.owner_box.pack(pady = 5)
+
+        petlabel = tk.Label(self, text="Pet Name: ")
+        petlabel.pack(pady=5)
+        self.pet_box = tk.Entry(self)
+        self.pet_box.pack(pady=5)
+
+        agelabel = tk.Label(self, text="Pet Age: ")
+        agelabel.pack(pady=5)
+        self.age_box = tk.Entry(self)
+        self.age_box.pack(pady=5)
+
+        recordlabel = tk.Label(self, text="Vaccination Records: ")
+        recordlabel.pack(pady=5)
+        self.record_box = tk.Entry(self)
+        self.record_box.pack(pady=5)
+
+        registerbutton = tk.Button(self, text="Register Pet", command=self.register_pet)
+        registerbutton.pack(pady=10)
+
+    def register_pet(self):
+        owner_name = self.owner_box.get()
+        pet_name = self.pet_box.get()
+        pet_age= self.pet_box.get()
+        if not isinstance(pet_age,int):
+            messagebox.showerror("Input Error", "Please, enter an integer")
+        vaccination_record= self.record_box.get().split(",")
+        for x in self.master.owners:
+            if x!= owner_name:
+                owner= Owner(owner_name)
+                self.master.owners.append(owner)
+
 
 class App(tk.Tk):
     def __init__(self):
