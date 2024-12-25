@@ -141,6 +141,7 @@ class pet_registration(tk.Toplevel):
         if isinstance(pet_age, int)== True:
             messagebox.showerror("Input Error", "Please, enter an integer")
 
+
         for x in self.master.owners:
             if x != owner_name:  # check if the owner is in the list
                 owner = Owner(owner_name)  # if its not it takes the name and makes and instance of it
