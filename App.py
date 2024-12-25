@@ -93,7 +93,6 @@ class pet_registration(tk.Toplevel):
         self.title("Pet Registration")
         self.geometry("800x600")
         self.master=master
-
         ownerlabel = tk.Label(self, text = "Owner Name: ")
         ownerlabel.pack(pady = 5)
         self.owner_box = tk.Entry(self)
