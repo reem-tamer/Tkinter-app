@@ -29,6 +29,51 @@
                     "species": "Dog"
                 }
             ]
+        },
+        {
+            "owner_name": "alex",
+            "pets": [
+                {
+                    "pet_name": "maeve",
+                    "age": 3,
+                    "vaccination_records": [
+                        [
+                            "One"
+                        ]
+                    ],
+                    "species": "Cat"
+                }
+            ]
+        },
+        {
+            "owner_name": "sarah",
+            "pets": [
+                {
+                    "pet_name": "lolo",
+                    "age": 3,
+                    "vaccination_records": [
+                        [
+                            ""
+                        ]
+                    ],
+                    "species": "cat"
+                }
+            ]
+        },
+        {
+            "owner_name": "sarah",
+            "pets": [
+                {
+                    "pet_name": "alex",
+                    "age": 2,
+                    "vaccination_records": [
+                        [
+                            ""
+                        ]
+                    ],
+                    "species": "dog"
+                }
+            ]
         }
 
     ]
