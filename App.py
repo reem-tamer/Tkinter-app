@@ -173,6 +173,13 @@ class pet_registration(tk.Toplevel):
         messagebox.showinfo("Register successful", f"{pet_name} is registered succesfully")
 
 
+class Appointment_Booking(tk.Toplevel):
+    def __init__(self, master):
+        super().__init__(master)
+        self.title("Appointment Booking")
+        self.geometry("800x600")
+        self.master = master
+
 
 
 class App(tk.Tk):
