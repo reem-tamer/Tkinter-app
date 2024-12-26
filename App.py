@@ -206,7 +206,7 @@ class App(tk.Tk):
         with open("owner_data.json","r")as file:
             owner_data = json.load(file)
             cumilative_owner_list = [Owner.get_dict(owner) for owner in owner_data.get("owners")]
-            self.owners.append(cumilative_owner_list)
+            self.owners.extend(cumilative_owner_list)
             #looping over the dictionary we have of the json file
             # and converting it into an object using the static method get_dict in the owner class
             # and append it in the owner list
