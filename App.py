@@ -156,7 +156,7 @@ class pet_registration(tk.Toplevel):
             if existing_owner is not None :  #to not causes the loop to break when it tries to access owner_name becuase of none
                 if existing_owner.owner_name == owner_name:
                     owner = existing_owner
-                    break
+
         # check if the owner is in the list
         # if its not it takes the name and makes and instance of it
 
@@ -198,15 +198,18 @@ class App(tk.Tk):
         with open("owner_data.json", "r") as file:
             owner_data = json.load(file)
         owner_data["owners"].extend([owner.owner_turn_dict() for owner in self.owners if owner is not None])
-#taking every owner object in the list of owners if it's not empty and turn them into an dict to enable saving them in json file
+#taking every owner object in the list of owners if it's not empty as  a dict and append it in the json file
         with open("owner_data.json","w") as file:
             json.dump(owner_data,file, indent=4)
 
     def owner_load_data(self):
         with open("owner_data.json","r")as file:
             owner_data = json.load(file)
-            self.owners = [Owner.get_dict(owner) for owner in owner_data.get("owners")]  #looping over the dictionary we have of the json file
+            cumilative_owner_list = [Owner.get_dict(owner) for owner in owner_data.get("owners")]
+            self.owners.append(cumilative_owner_list)
+            #looping over the dictionary we have of the json file
             # and converting it into an object using the static method get_dict in the owner class
+            # and append it in the owner list
 
 if __name__ == "__main__":
     app = App()
