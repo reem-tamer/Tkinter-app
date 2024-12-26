@@ -157,11 +157,10 @@ class pet_registration(tk.Toplevel):
                 if existing_owner.owner_name == owner_name:
                     owner = existing_owner
 
+
         # check if the owner is in the list
         # if its not it takes the name and makes and instance of it
-
         # then appends it to the class
-
 
         if owner is None:
             owner = Owner(owner_name)

@@ -4,14 +4,14 @@
             "owner_name": "Mona",
             "pets": [
                 {
-                    "pet_name": "Alex",
+                    "pet_name": "lolo",
                     "age": 3,
-                    "vaccine record": [
+                    "vaccination_records": [
                         [
-                            "one"
+                            ""
                         ]
                     ],
-                    "species": "Dog"
+                    "species": "cat"
                 }
             ]
         },
@@ -19,16 +19,17 @@
             "owner_name": "Ahmed",
             "pets": [
                 {
-                    "pet_name": "joey",
-                    "age": 3,
+                    "pet_name": "Alex",
+                    "age": 4,
                     "vaccination_records": [
                         [
                             "one"
                         ]
                     ],
-                    "species": "Cat"
+                    "species": "Dog"
                 }
             ]
         }
+
     ]
 }
