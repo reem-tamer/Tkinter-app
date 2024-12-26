@@ -183,7 +183,12 @@ class Appointment_Booking(tk.Toplevel):
         owner_label=tk.Label(self,text="Owner Name: ")
         owner_label.pack(pady=5)
         self.owner_choice= tk.StringVar(self) # when we make the drag down menu in the booking appointment window this will show which option was chosen from the drag down
-        self.owner_menu= tk.OptionMenu(self,self.owner_choice,*[owner.owner_name for owner in self.master.owners]) # *args is syntactical in the menu choice to display all the owners in the list
+
+        owner_list_names =  [owner.owner_name for owner in self.master.owners if owner is not None]
+        if not owner_list_names:
+            owner_list_names = ["No Owners Available"]
+        self.owner_menu= tk.OptionMenu(self,self.owner_choice,*owner_list_names) # *args is syntactical in the menu choice to display all the owners in the list
+
         self.owner_menu.pack(pady=5)
         self.owner_choice.trace_add("write",self.update_pet_menu) #it traces back the owner choice and gives us the chosen owners pets
 
@@ -198,7 +203,7 @@ class Appointment_Booking(tk.Toplevel):
         self.vet_choice = tk.StringVar(self)
         self.vet_menu= tk.OptionMenu(self,self.vet_choice,*[vet.vet_name for vet in self.master.vets]) #  *option menue doesnt read a list and the * so it views it as one value
         self.vet_menu.pack(pady=5)
-        self.vet_choice.trace_add("write", self.update_timeslots)
+        self.vet_choice.trace_add("write", self.update_time_slots)
 
         timeslot_label= tk.Label(self, text= " Timeslot: ")
         timeslot_label.pack(pady=5)
@@ -206,9 +211,8 @@ class Appointment_Booking(tk.Toplevel):
         self.timeslot_menu= tk.OptionMenu(self,self.timeslot_choice,"") # the value is an empty string since the timelsots wont appear except when the vet is chosen
         self.timeslot_menu.pack(pady=5)
 
-        booking_button= tk.Button(self,text="Book Appointment", command= self.book_appointment)
+        booking_button= tk.Button(self,text="Book Appointment", command= self.booking_appointment)
         booking_button.pack(pady=10)
-
 
 
     def update_pet_menu(self,*_): #using args the _ it helps us ignore the rest of the unneded values lile species,age,vaccination
