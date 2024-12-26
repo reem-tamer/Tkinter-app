@@ -39,6 +39,7 @@ class Owner:
     def get_dict(owner_data):
         owner=Owner(owner_data["owner_name"])
         owner.pets=[Pet.pet_get_dict(pet) for pet in owner_data["pets"]]
+        return owner
 
 class Vet:
     def __init__(self, vet_name, available_appointments):
@@ -173,12 +174,13 @@ class pet_registration(tk.Toplevel):
         messagebox.showinfo("Register successful", f"{pet_name} is registered succesfully")
 
 
-class Appointment_Booking(tk.Toplevel):
+class AppointmentBooking(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)
         self.title("Appointment Booking")
         self.geometry("800x600")
         self.master = master
+        print(self.master.owners)
 
         owner_label=tk.Label(self,text="Owner Name: ")
         owner_label.pack(pady=5)
@@ -285,6 +287,7 @@ class Appointment_Booking(tk.Toplevel):
 
 
 
+
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -307,7 +310,7 @@ class App(tk.Tk):
         pet_registration(self)
 
     def appointment_booking_button(self):
-        Appointment_Booking(self)
+        AppointmentBooking(self)
 
     def owner_save_data(self):
         with open("owner_data.json", "r") as file:
