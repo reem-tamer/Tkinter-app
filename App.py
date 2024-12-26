@@ -242,19 +242,23 @@ class Appointment_Booking(tk.Toplevel):
                 for x in chosen_vet_name.available_appointments:
                     self.timeslot_menu["Menu"].add_command(label=x, command=tk._setit(self.timeslot_choice,x))
 
-        def book_appointment(self):
+        def booking_appointment(self):
             #get selected choice of everything (final choice)
             selected_owner = self.owner_choice.get()
             selected_pet = self.pet_choice.get()
             selected_vet = self.vet_choice.get()
             selected_timeslot = self.timeslot_choice.get()
 
+            # searches through the list self.master.owners (which holds all the owner objects)
+            # to find the one that matches the selected_owner name.
             owner = None
             for x in self.master.owners:
                 if x.owner_name == selected_owner:
                     owner = x
                     break
 
+            #After finding the owner, the code searches through
+            # the owner's pets list to find the pet_name that matches the selected pet.
             pet = None
             for y in owner.pets:
                 if y.pet_name == selected_pet:
@@ -267,13 +271,19 @@ class Appointment_Booking(tk.Toplevel):
                     vet = z
                     break
 
+            #finalizing the appointment and storing it with entered
+            # data in the func book_appointmet of receptionist class
             self.master.receptionist.book_appointment(pet, owner, vet, selected_timeslot)
 
+            #If any of the fields are missing, it shows an error message
             if not selected_owner or not selected_pet or not selected_vet or not selected_timeslot:
                 messagebox.showerror("Missing Fields", "All fields must be filled.")
                 return
 
+            #update the available timeslots after the appointment is booked
             self.update_time_slots()
+
+
 
 class App(tk.Tk):
     def __init__(self):
