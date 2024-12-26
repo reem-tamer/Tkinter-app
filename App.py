@@ -1,6 +1,5 @@
 import json
 import tkinter as tk
-from datetime import datetime
 from tkinter import messagebox
 
 
@@ -15,11 +14,11 @@ class Pet:
         self.vaccine_rec.append(vaccine)
 
     def pet_turn_dict(self):  # turn our object to a dict so json file can handle it(save)
-        pet_dict = {"pet_name": self.pet_name, "age": self.age, "vaccine record": self.vaccine_rec,"species":self.species}
+        pet_dict = {"pet_name": self.pet_name, "age": self.age, "vaccination_records": self.vaccine_rec,"species":self.species}
         return pet_dict
     @staticmethod
     def pet_get_dict(owner_data): # returns the dict back to a class
-        return Pet(owner_data["pet_name"],owner_data["age"],owner_data["vaccination_records"],owner_data["species"])
+        return Pet(owner_data["pet_name"],owner_data["age"],owner_data.get("vaccination_records",[]),owner_data["species"])
 
 
 class Owner:
@@ -142,10 +141,10 @@ class pet_registration(tk.Toplevel):
 
         vaccination_record = self.record_box.get().split(",")
         species = self.species_box.get()
-        pet_age = self.pet_box.get()
+        pet_age = self.age_box.get()
 
         try:
-            pet_age = int(self.age_box.get())
+            pet_age = int(pet_age)
         except ValueError:
             messagebox.showerror("Input Error", "Please enter a valid integer for the pet's age.")
             return
@@ -154,9 +153,10 @@ class pet_registration(tk.Toplevel):
 
         owner = None
         for existing_owner in self.master.owners:
-            if existing_owner.owner_name == owner_name:
-                owner = existing_owner
-                break
+            if existing_owner is not None :  #to not causes the loop to break when it tries to access owner_name becuase of none
+                if existing_owner.owner_name == owner_name:
+                    owner = existing_owner
+                    break
         # check if the owner is in the list
         # if its not it takes the name and makes and instance of it
 
@@ -170,7 +170,9 @@ class pet_registration(tk.Toplevel):
 
         pet = Pet(pet_name, pet_age, species, vaccination_record)
         owner.add_pet(pet)
+        self.master.owner_save_data()  #save data in the file
         messagebox.showinfo("Register successful", f"{pet_name} is registered succesfully")
+
 
 
 
@@ -193,15 +195,17 @@ class App(tk.Tk):
         pet_registration(self)
 
     def owner_save_data(self):
-        owner_data= {"owners": [x.owner_turn_dict()] for x in self.owners}
-#taking every owner object in the list of owners and turn them into an dict to enable saving them in json file
+        with open("owner_data.json", "r") as file:
+            owner_data = json.load(file)
+        owner_data["owners"].extend([owner.owner_turn_dict() for owner in self.owners if owner is not None])
+#taking every owner object in the list of owners if it's not empty and turn them into an dict to enable saving them in json file
         with open("owner_data.json","w") as file:
             json.dump(owner_data,file, indent=4)
 
     def owner_load_data(self):
         with open("owner_data.json","r")as file:
-            owner_data=json.load(file)
-            self.owners=  [ Owner.get_dict(owner) for owner in owner_data["owners"]]  #looping over the dictionary we have of the json file
+            owner_data = json.load(file)
+            self.owners = [Owner.get_dict(owner) for owner in owner_data.get("owners")]  #looping over the dictionary we have of the json file
             # and converting it into an object using the static method get_dict in the owner class
 
 if __name__ == "__main__":
