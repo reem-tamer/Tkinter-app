@@ -229,59 +229,59 @@ class Appointment_Booking(tk.Toplevel):
             for x in pet_names:
                 self.pet_menu["Menu"].add_command(label=x , command=tk._setit(self.pet_choice,x)) # automatically updates with selected pet name when the user selects the pet from the option menu
 
-        def update_time_slots(self, *_):
-            vet_chosen = self.vet_choice.get()
-            chosen_vet_name = None
-            for x in self.master.vets:
-                if x.vet_name == vet_chosen:
-                    chosen_vet_name = x
-                    break
-            if chosen_vet_name:
-                self.timeslot_choice.set("")
-                self.timeslot_menu["Menu"].delete(0, "end")
-                for x in chosen_vet_name.available_appointments:
-                    self.timeslot_menu["Menu"].add_command(label=x, command=tk._setit(self.timeslot_choice,x))
+    def update_time_slots(self, *_):
+        vet_chosen = self.vet_choice.get()
+        chosen_vet_name = None
+        for x in self.master.vets:
+            if x.vet_name == vet_chosen:
+                chosen_vet_name = x
+                break
+        if chosen_vet_name:
+            self.timeslot_choice.set("")
+            self.timeslot_menu["Menu"].delete(0, "end")
+            for x in chosen_vet_name.available_appointments:
+                self.timeslot_menu["Menu"].add_command(label=x, command=tk._setit(self.timeslot_choice,x))
 
-        def booking_appointment(self):
-            #get selected choice of everything (final choice)
-            selected_owner = self.owner_choice.get()
-            selected_pet = self.pet_choice.get()
-            selected_vet = self.vet_choice.get()
-            selected_timeslot = self.timeslot_choice.get()
+    def booking_appointment(self):
+        #get selected choice of everything (final choice)
+        selected_owner = self.owner_choice.get()
+        selected_pet = self.pet_choice.get()
+        selected_vet = self.vet_choice.get()
+        selected_timeslot = self.timeslot_choice.get()
 
-            # searches through the list self.master.owners (which holds all the owner objects)
-            # to find the one that matches the selected_owner name.
-            owner = None
-            for x in self.master.owners:
-                if x.owner_name == selected_owner:
-                    owner = x
-                    break
+        # searches through the list self.master.owners (which holds all the owner objects)
+        # to find the one that matches the selected_owner name.
+        owner = None
+        for x in self.master.owners:
+            if x.owner_name == selected_owner:
+                owner = x
+                break
 
-            #After finding the owner, the code searches through
-            # the owner's pets list to find the pet_name that matches the selected pet.
-            pet = None
-            for y in owner.pets:
-                if y.pet_name == selected_pet:
-                    pet = y
-                    break
+        #After finding the owner, the code searches through
+        # the owner's pets list to find the pet_name that matches the selected pet.
+        pet = None
+        for y in owner.pets:
+            if y.pet_name == selected_pet:
+                pet = y
+                break
 
-            vet = None
-            for z in self.master.vets:
-                if z.vet_name == selected_vet:
-                    vet = z
-                    break
+        vet = None
+        for z in self.master.vets:
+            if z.vet_name == selected_vet:
+                vet = z
+                break
 
-            #finalizing the appointment and storing it with entered
-            # data in the func book_appointmet of receptionist class
-            self.master.receptionist.book_appointment(pet, owner, vet, selected_timeslot)
+        #finalizing the appointment and storing it with entered
+        # data in the func book_appointmet of receptionist class
+        self.master.receptionist.book_appointment(pet, owner, vet, selected_timeslot)
 
-            #If any of the fields are missing, it shows an error message
-            if not selected_owner or not selected_pet or not selected_vet or not selected_timeslot:
-                messagebox.showerror("Missing Fields", "All fields must be filled.")
-                return
+        #If any of the fields are missing, it shows an error message
+        if not selected_owner or not selected_pet or not selected_vet or not selected_timeslot:
+            messagebox.showerror("Missing Fields", "All fields must be filled.")
+            return
 
-            #update the available timeslots after the appointment is booked
-            self.update_time_slots()
+        #update the available timeslots after the appointment is booked
+        self.update_time_slots()
 
 
 
@@ -300,8 +300,14 @@ class App(tk.Tk):
         register_pet_button = tk.Button(self, text="Register Pet", command=self.registration_button)
         register_pet_button.pack(pady=10)
 
+        appointment_booking_button = tk.Button(self, text="Book Appointment", command=self.appointment_booking_button)
+        appointment_booking_button.pack(pady= 10)
+
     def registration_button(self):
         pet_registration(self)
+
+    def appointment_booking_button(self):
+        Appointment_Booking(self)
 
     def owner_save_data(self):
         with open("owner_data.json", "r") as file:
