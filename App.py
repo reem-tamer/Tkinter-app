@@ -180,6 +180,59 @@ class Appointment_Booking(tk.Toplevel):
         self.geometry("800x600")
         self.master = master
 
+        owner_label=tk.Label(self,text="Owner Name: ")
+        owner_label.pack(pady=5)
+        self.owner_choice= tk.StringVar(self) # when we make the drag down menu in the booking appointment window this will show which option was chosen from the drag down
+        self.owner_menu= tk.OptionMenu(self,self.owner_choice,*[owner.owner_name for owner in self.master.owners]) # *args is syntactical in the menu choice to display all the owners in the list
+        self.owner_menu.pack(pady=5)
+        self.owner_choice.trace_add("write",self.update_pet_menu) #it traces back the owner choice and gives us the chosen owners pets
+
+        pet_label= tk.Label(self,text= "Pet Name: ")
+        pet_label.pack(pady=5)
+        self.pet_choice= tk.StringVar(self) # when we make the drag down menu in the booking appointment window this will show which option was chosen from the drag down
+        self.pet_menu= tk.OptionMenu(self,self.pet_choice,"") # the value is an empty string because this field will be empty until an owner is chosen
+        self.pet_menu.pack(pady=5)
+
+        vet_label=tk.Label(self,text="Vet: ")
+        vet_label.pack(pady=5)
+        self.vet_choice = tk.StringVar(self)
+        self.vet_menu= tk.OptionMenu(self,self.vet_choice,*[vet.vet_name for vet in self.master.vets]) #  *option menue doesnt read a list and the * so it views it as one value
+        self.vet_menu.pack(pady=5)
+        self.vet_choice.trace_add("write", self.update_timeslots)
+
+        timeslot_label= tk.Label(self, text= " Timeslot: ")
+        timeslot_label.pack(pady=5)
+        self.timeslot_choice = tk.StringVar(self)
+        self.timeslot_menu= tk.OptionMenu(self,self.timeslot_choice,"") # the value is an empty string since the timelsots wont appear except when the vet is chosen
+        self.timeslot_menu.pack(pady=5)
+
+        booking_button= tk.Button(self,text="Book Appointment", command= self.book_appointment)
+        booking_button.pack(pady=10)
+
+
+
+    def update_pet_menu(self,*_): #using args the _ it helps us ignore the rest of the unneded values lile species,age,vaccination
+        chosen_owner= self.owner_choice.get() # get the chosen owner
+        chosen_owner_name= None
+        for x in self.master.owners:
+            if x.owner_name == chosen_owner: # compare the owner objects in the list of owners with the string owner choice
+                chosen_owner_name = x
+                break # for efficiency to break the loop as solon as owner is found and continue iterating
+        if chosen_owner_name:
+            pet_names= [ pet.pet_name for pet in chosen_owner_name.pets] # getting the names of an owners pets
+
+            #if after choosing an owner wanting to change our minds and choose another one
+            # this is how the pets will be removed to allow space for the new owners pets to be chosen
+            self.pet_choice.set("") # if the owner selection changes this line resets the pet selection and doesnt show the previously selected pet
+                                      # set deletes the pet on the choice bar
+            self.pet_menu["Menu"].delete(0,"end") # .delete removes the unwanted pets from the drag down
+            for x in pet_names:
+                self.pet_menu["Menu"].add_command(label=x , command=tk._setit(self.pet_choice,x)) # automatically updates with selected pet name when the user selects the pet from the option menu
+
+
+
+
+
 
 
 class App(tk.Tk):
