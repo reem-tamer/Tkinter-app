@@ -229,11 +229,51 @@ class Appointment_Booking(tk.Toplevel):
             for x in pet_names:
                 self.pet_menu["Menu"].add_command(label=x , command=tk._setit(self.pet_choice,x)) # automatically updates with selected pet name when the user selects the pet from the option menu
 
+        def update_time_slots(self, *_):
+            vet_chosen = self.vet_choice.get()
+            chosen_vet_name = None
+            for x in self.master.vets:
+                if x.vet_name == vet_chosen:
+                    chosen_vet_name = x
+                    break
+            if chosen_vet_name:
+                self.timeslot_choice.set("")
+                self.timeslot_menu["Menu"].delete(0, "end")
+                for x in chosen_vet_name.available_appointments:
+                    self.timeslot_menu["Menu"].add_command(label=x, command=tk._setit(self.timeslot_choice,x))
 
+        def book_appointment(self):
+            #get selected choice of everything (final choice)
+            selected_owner = self.owner_choice.get()
+            selected_pet = self.pet_choice.get()
+            selected_vet = self.vet_choice.get()
+            selected_timeslot = self.timeslot_choice.get()
 
+            owner = None
+            for x in self.master.owners:
+                if x.owner_name == selected_owner:
+                    owner = x
+                    break
 
+            pet = None
+            for y in owner.pets:
+                if y.pet_name == selected_pet:
+                    pet = y
+                    break
 
+            vet = None
+            for z in self.master.vets:
+                if z.vet_name == selected_vet:
+                    vet = z
+                    break
 
+            self.master.receptionist.book_appointment(pet, owner, vet, selected_timeslot)
+
+            if not selected_owner or not selected_pet or not selected_vet or not selected_timeslot:
+                messagebox.showerror("Missing Fields", "All fields must be filled.")
+                return
+
+            self.update_time_slots()
 
 class App(tk.Tk):
     def __init__(self):
