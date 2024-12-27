@@ -291,7 +291,6 @@ class AppointmentBooking(tk.Toplevel):
         self.update_time_slots()
 
 
-
 class InventoryManagementWindow(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)
@@ -318,11 +317,17 @@ class App(tk.Tk):
         appointment_booking_button = tk.Button(self, text="Book Appointment", command=self.appointment_booking_button)
         appointment_booking_button.pack(pady= 10)
 
+        view_appointments_button = tk.Button(self, text="View Appointments", command=self.view_appointments_button)
+        view_appointments_button.pack(pady=10)
+
     def registration_button(self):
         pet_registration(self)
 
     def appointment_booking_button(self):
         AppointmentBooking(self)
+
+    def view_appointments_button(self):
+        self.receptionist.view_appointment()
 
     def owner_save_data(self):
         with open("owner_data.json", "r") as file:
