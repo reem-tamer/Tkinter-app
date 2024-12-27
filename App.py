@@ -1,5 +1,4 @@
 
-####
 import json
 import tkinter as tk
 from tkinter import messagebox
@@ -503,7 +502,7 @@ class App(tk.Tk):
         self.background_image_path = "Wallpaper.png"  # Replace with your image file path
         self.background_image = Image.open(self.background_image_path)
         self.background_photo = ImageTk.PhotoImage(self.background_image)
-        self.canvas = tk.Canvas(self, width=800, height=600)
+        self.canvas = tk.Canvas(self, width=800, height=670)
         self.canvas.pack(fill="both", expand=True)
         self.canvas.create_image(0, 0, anchor="nw", image=self.background_photo)
 
