@@ -498,7 +498,7 @@ class App(tk.Tk):
 
         canvas= Canvas(self,width="800", height="600")
         canvas.pack(fill="both",expand=True)
-        background= PhotoImage(file="wallpaper.jpg")
+        background= PhotoImage(file="Wallpaper.png")
         bg= canvas.create_image(0,0,image=background,anchor="nw")
 
         icon= PhotoImage(file="pet_icon.png")
