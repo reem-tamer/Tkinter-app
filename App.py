@@ -1,6 +1,9 @@
 import json
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import PhotoImage
+from PIL import Image, ImageTk
+from tkinter import Canvas
 import smtplib                                      #transfer sending emails from server to another
 from email.mime.text import MIMEText                #represent email body as email text
 from email.mime.multipart import MIMEMultipart      #create from: to:  message:subject
@@ -493,6 +496,13 @@ class App(tk.Tk):
         self.geometry("800x600")  # no instance for the window
         self.title("Fluffy Paws Clinic and Shop")
 
+        canvas= Canvas(self,width="800", height="600")
+        canvas.pack(fill="both",expand=True)
+        background= PhotoImage(file="wallpaper.jpg")
+        bg= canvas.create_image(0,0,image=background,anchor="nw")
+
+        icon= PhotoImage(file="pet_icon.png")
+        self.iconphoto(True,icon)
 
         self.vets = [Vet("DR. Ahmed Anwar", ["6:00pm", "7:00pm", "8:00pm"],"ahmed.anwer@example.com"),
                      Vet("DR. Alex Johns", ["6:00pm", "7:00pm", "8:00pm"],"alex.johns@example.com")]
