@@ -387,13 +387,52 @@ class AppointmentBooking(tk.Toplevel):
         # update the available timeslots after the appointment is booked
         self.master.receptionist.book_appointment(owner, pet, vet, selected_timeslot)
         self.update_time_slots()
-        self.send_email_notification(pet.pet_name,owner.owner_name,selected_timeslot)
+        self.send_email_notification(pet.pet_name,owner.owner_name,selected_timeslot,vet.vet_name)
 
-    def send_email_notification (self,pet_name,owner_name,timeslot):
+    def send_email_notification (self,pet_name,owner_name,timeslot,vet_name):
         try:
-            email_host = "smtp.gmail.com"    #server
-            email_port = 587                 #standard port for sending email
+            email_host = "smtp.gmail.com"                   #server
+            email_port = 587                                #standard port for sending email
+            sender_email = os.getenv("SENDER_EMAIL")        #sender email is the one who send the email (clinic)
+            email_password = os.getenv("EMAIL_PASSWORD")    #SMTP password
+            recipient_email =os.getenv("EMAIL_ADDRESS")     #who will recive the email (vet)
+            #we save the file into .emv format (all files to not save as a text file)
 
+            if not sender_email or not email_password or not recipient_email:
+                raise ValueError("Email credentials or recipient email are not set properly")
+
+            email_subject = "Appointment Reminder"
+            email_body = f"""
+            Dear {vet_name},
+            
+            You have a new appointment scheduled :
+            Pet Name : {pet_name}
+            Owner Name : {owner_name}
+            Time : {timeslot}
+            
+            Regards,
+            Fluffy Paws Clinic 
+            """
+
+
+            #intialize email msg that can hold multiple parts
+            msg = MIMEMultipart()                               #instance from mumemultipart class
+            msg["From"] = sender_email                          #set from field in the email header
+            msg["To"] = recipient_email                         #set to field in the email header
+            msg["Subject"] = email_subject                      #set subject field in the email header
+            msg.attach(MIMEText(email_body,"plain"))    #create mimetext object using email body string
+                                                                # and specify the dormat as plain(not HTML)
+
+
+            #enable commmunication with an email server
+            with smtplib.SMTP(email_host,email_port) as server :    #create a connection to the SMTP server
+                server.starttls()                                   #secure the communication
+                server.login(sender_email,email_password)           #send the email and password to SMTP server
+                server.send_message(msg)                            #send the email msg to reciever
+
+            print(f"Email sen successfully to {recipient_email}")
+        except Exception as error :
+            print(f"Error sending email: {error}")
 
 
 
