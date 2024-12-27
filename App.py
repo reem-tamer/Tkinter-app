@@ -581,7 +581,7 @@ class App(tk.Tk):
     def main_menu(self):
         label =tk.Label(self, text="Fluffy Paws Clinic and Shop",
                       font=("Arial", 15, "bold"),
-                      fg="#f2c29b", bg="#332414", relief=RAISED, bd=15, padx=15, pady=15)
+                      fg="#fad1af", bg="#5c3d1c", relief=RAISED, bd=15, padx=15, pady=15)
         label.pack(padx=20,pady=20)
         self.canvas.create_window(400, 50, window=label)
 
