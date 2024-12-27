@@ -490,6 +490,8 @@ class Inventory_management(tk.Toplevel):
 
 
 
+
+
 class App(tk.Tk):
     def __init__(self):
 
@@ -578,8 +580,6 @@ class App(tk.Tk):
             # looping over the dictionary we have of the json file
             # and converting it into an object using the static method get_dict in the owner class
             # and append it in the owner list
-
-
 
 
 
