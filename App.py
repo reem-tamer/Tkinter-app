@@ -74,15 +74,16 @@ class Inventory:
 
     def display_inv(self):  # put the key and value in s atring format in a list then turn the list into a string using .join
         display_inv = "\n".join([f"{k}:{v}" for k, v in self.inventory.items()])
-        # messagebox.showinfo("Available Inventory", display_inv)  # put the .join string in a message box
-        return display_inv
+        messagebox.showinfo("Available Inventory", display_inv)  # put the .join string in a message box
+        #return display_inv
 
     def update_inv(self, item, sales):
 
         for key, value in self.inventory.items():
             if item == key:
-                if sales < value:
+                if sales <= value:
                     self.inventory[item] -= sales
+                    messagebox.showinfo("Update Succesful","Inventory updated")
                 else:
                     messagebox.showerror("Error", "Invalid sales amount, please revise")
 
@@ -396,11 +397,22 @@ class Inventory_management(tk.Toplevel):
         self.quantity_entry = tk.Entry(self)
         self.quantity_entry.pack(pady=5)
 
-        update_button= tk.Button(self, text="Update Inventory", command=self.master.receptionist.inventory.update_inv(self.item_choice.get(),self.quantity_entry.get()))
+        update_button= tk.Button(self, text="Update Inventory", command=lambda: self.update_inventory())
         update_button.pack(pady=10)
 
-        view_button = tk.Button(self, text="View Inventory", command=self.master.receptionist.inventory.display_inv())
+                                                                        #instance from receptionist class and inside the
+                                                                        #receptionist class we made instance from inventory class to
+                                                                        #get the func display_inv from inventory class
+        view_button = tk.Button(self, text="View Inventory", command=lambda: self.master.receptionist.inventory.display_inv())
         view_button.pack(pady=10)
+
+    def update_inventory(self):
+        try:
+            item = self.item_choice.get()
+            sales = int(self.quantity_entry.get())
+            self.master.receptionist.inventory.update_inv(item, sales)
+        except ValueError:
+            messagebox.showerror("Input Error", "Please enter a valid number for Quantity Sold.")
 
 
 class App(tk.Tk):
