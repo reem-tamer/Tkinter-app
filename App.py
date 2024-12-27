@@ -422,6 +422,9 @@ class Inventory_management(tk.Toplevel):
         view_button = tk.Button(self, text="View Inventory", command=lambda: self.master.receptionist.inventory.display_inv())
         view_button.pack(pady=10)
 
+        back_button = tk.Button(self, text="Back To Main Menu", command=self.back_to_menu)
+        back_button.pack(pady=20)
+
     def update_inventory(self):
         try:
             item = self.item_choice.get()
@@ -429,6 +432,11 @@ class Inventory_management(tk.Toplevel):
             self.master.receptionist.inventory.update_inv(item, sales)
         except ValueError:
             messagebox.showerror("Input Error", "Please enter a valid number for Quantity Sold.")
+
+    def back_to_menu(self):
+        self.destroy()             #distroy the new window
+        self.master.deiconify()    #return the main menu window
+
 
 
 class App(tk.Tk):
