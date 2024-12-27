@@ -77,15 +77,29 @@ class Inventory:
         messagebox.showinfo("Available Inventory", display_inv)  # put the .join string in a message box
         #return display_inv
 
+    def save_inv(self):
+        with open("inventory.json", "w") as file:
+            json.dump(self.inventory, file, indent=4)
+
+    def load_inv(self):
+        with open("inventory.json", "r") as file:
+            return json.load(file)
+
     def update_inv(self, item, sales):
 
         for key, value in self.inventory.items():
             if item == key:
                 if sales <= value:
                     self.inventory[item] -= sales
+                    self.save_inv()
                     messagebox.showinfo("Update Succesful","Inventory updated")
+
                 else:
                     messagebox.showerror("Error", "Invalid sales amount, please revise")
+
+
+
+
 
 
 
