@@ -5,6 +5,7 @@ from tkinter import messagebox
 from tkinter import PhotoImage
 from PIL import Image, ImageTk
 from tkinter import Canvas
+from tkinter.constants import RAISED
 import smtplib                                      #transfer sending emails from server to another
 from email.mime.text import MIMEText                #represent email body as email text
 from email.mime.multipart import MIMEMultipart      #create from: to:  message:subject
@@ -204,48 +205,48 @@ class pet_registration(tk.Toplevel):
         self.canvas.create_image(0, 0, anchor="nw", image=self.background_photo)
 
         self.master = master
-        ownerlabel = tk.Label(self, text="Owner Name: ",font=("Arial",10))
+        ownerlabel = tk.Label(self, text="Owner Name: ",font=("Arial",14),fg="#041845")
         ownerlabel.pack(pady=5)
         self.canvas.create_window(400, 50, window=ownerlabel)
-        self.owner_box = tk.Entry(self,font=("Arial",10))
+        self.owner_box = tk.Entry(self,font=("Arial",14),fg="#041845")
         self.owner_box.pack(pady=5)
         self.canvas.create_window(400, 90, window=self.owner_box)
 
-        petlabel = tk.Label(self, text="Pet Name: ",font=("Arial",10))
+        petlabel = tk.Label(self, text="Pet Name: ",font=("Arial",14),fg="#041845")
         petlabel.pack(pady=5)
         self.canvas.create_window(400, 130, window=petlabel)
-        self.pet_box = tk.Entry(self,font=("Arial",10))
+        self.pet_box = tk.Entry(self,font=("Arial",14),fg="#041845")
         self.pet_box.pack(pady=5)
         self.canvas.create_window(400, 170, window=self.pet_box)
 
-        agelabel = tk.Label(self, text="Pet Age: ",font=("Arial",10))
+        agelabel = tk.Label(self, text="Pet Age: ",font=("Arial",14),fg="#041845")
         agelabel.pack(pady=5)
         self.canvas.create_window(400, 210, window=agelabel)
-        self.age_box = tk.Entry(self,font=("Arial",10))
+        self.age_box = tk.Entry(self,font=("Arial",14),fg="#041845")
         self.age_box.pack(pady=5)
         self.canvas.create_window(400, 250, window=self.age_box)
 
-        recordlabel = tk.Label(self, text="Vaccination Records: ",font=("Arial",10))
+        recordlabel = tk.Label(self, text="Vaccination Records: ",font=("Arial",14),fg="#041845")
         recordlabel.pack(pady=5)
         self.canvas.create_window(400, 290, window=recordlabel)
-        self.record_box = tk.Entry(self,font=("Arial",10))
+        self.record_box = tk.Entry(self,font=("Arial",14),fg="#041845")
         self.record_box.pack(pady=5)
         self.canvas.create_window(400, 330, window=self.record_box)
 
-        specieslabel = tk.Label(self, text="Species: ",font=("Arial",10))
+        specieslabel = tk.Label(self, text="Species: ",font=("Arial",14),fg="#041845")
         specieslabel.pack(pady=5)
         self.canvas.create_window(400, 370, window=specieslabel)
-        self.species_box = tk.Entry(self,font=("Arial",10))
+        self.species_box = tk.Entry(self,font=("Arial",14),fg="#041845")
         self.species_box.pack(pady=5)
         self.canvas.create_window(400, 410, window=self.species_box)
 
-        registerbutton = tk.Button(self, text="Register Pet",font=("Arial",10), command=self.register_pet)
+        registerbutton = tk.Button(self, text="Register Pet",font=("Arial",14),fg="#041845", command=self.register_pet)
         registerbutton.pack(pady=10)
         self.canvas.create_window(400, 460, window=registerbutton)
 
-        back_button = tk.Button(self, text="Back To Main Menu",font=("Arial",10), command= self.back_to_menu)
+        back_button = tk.Button(self, text="Back To Main Menu",font=("Arial",14),fg="#041845", command= self.back_to_menu)
         back_button.pack(pady=20)
-        self.canvas.create_window(400, 500, window=back_button)
+        self.canvas.create_window(400, 510, window=back_button)
 
 
 
@@ -305,7 +306,7 @@ class AppointmentBooking(tk.Toplevel):
         self.master = master
         print(self.master.owners)
 
-        owner_label = tk.Label(self, text="Owner Name: ",font=("Arial",10))
+        owner_label = tk.Label(self, text="Owner Name: ",font=("Arial",13),fg="#041845")
         owner_label.pack(pady=5)
         self.canvas.create_window(400, 50, window=owner_label)
 
@@ -323,7 +324,7 @@ class AppointmentBooking(tk.Toplevel):
         self.owner_choice.trace_add("write",
                                     self.update_pet_menu)  # it traces back the owner choice and gives us the chosen owners pets
 
-        pet_label = tk.Label(self, text="Pet Name: ",font=("Arial",10))
+        pet_label = tk.Label(self, text="Pet Name: ",font=("Arial",13),fg="#041845")
         pet_label.pack(pady=5)
         self.canvas.create_window(400, 130, window=pet_label)
         self.pet_choice = tk.StringVar(
@@ -333,7 +334,7 @@ class AppointmentBooking(tk.Toplevel):
         self.pet_menu.pack(pady=5)
         self.canvas.create_window(400, 170, window=self.pet_menu)
 
-        vet_label = tk.Label(self, text="Vet: ",font=("Arial",10))
+        vet_label = tk.Label(self, text="Vet: ",font=("Arial",13),fg="#041845")
         vet_label.pack(pady=5)
         self.canvas.create_window(400, 220, window=vet_label)
         self.vet_choice = tk.StringVar(self)
@@ -343,7 +344,7 @@ class AppointmentBooking(tk.Toplevel):
         self.canvas.create_window(400, 260, window=self.vet_menu)
         self.vet_choice.trace_add("write", self.update_time_slots)
 
-        timeslot_label = tk.Label(self, text=" Timeslot: ",font=("Arial",10))
+        timeslot_label = tk.Label(self, text=" Timeslot: ",font=("Arial",13),fg="#041845")
         timeslot_label.pack(pady=5)
         self.canvas.create_window(400, 300, window=timeslot_label)
         self.timeslot_choice = tk.StringVar(self)
@@ -352,13 +353,13 @@ class AppointmentBooking(tk.Toplevel):
         self.timeslot_menu.pack(pady=5)
         self.canvas.create_window(400, 340, window=self.timeslot_menu)
 
-        booking_button = tk.Button(self, text="Book Appointment",font=("Arial",10), command=self.booking_appointment)
+        booking_button = tk.Button(self, text="Book Appointment",font=("Arial",14),fg="#041845", command=self.booking_appointment)
         booking_button.pack(pady=10)
-        self.canvas.create_window(400, 390, window=booking_button)
+        self.canvas.create_window(400, 400, window=booking_button)
 
-        back_button = tk.Button(self, text="Back To Main Menu",font=("Arial",10), command=self.back_to_menu)
+        back_button = tk.Button(self, text="Back To Main Menu",font=("Arial",14),fg="#041845", command=self.back_to_menu)
         back_button.pack(pady=20)
-        self.canvas.create_window(400, 430, window=back_button)
+        self.canvas.create_window(400, 450, window=back_button)
 
 
 
@@ -506,35 +507,35 @@ class Inventory_management(tk.Toplevel):
         self.canvas.pack(fill="both", expand=True)
         self.canvas.create_image(0, 0, anchor="nw", image=self.background_photo)
 
-        items_label = tk.Label(self, text="Select Item:",font=("Arial",12))
-        items_label.pack(pady=5)
+        items_label = tk.Label(self, text="Select Item:",font=("Arial",14),fg="#041845")
+        items_label.pack(padx=10,pady=10)
         self.item_choice = tk.StringVar(self)
         self.item_menu = tk.OptionMenu(self, self.item_choice, *self.master.receptionist.inventory.inventory.keys())
-        self.item_menu.pack(pady=5)
+        self.item_menu.pack(padx=10,pady=10)
         self.canvas.create_window(400, 100, window=items_label)
         self.canvas.create_window(400, 140, window=self.item_menu)
 
 
-        quantitysold_label = tk.Label(self, text="Quantity Sold:",font=("Arial",12))
-        quantitysold_label.pack(pady=5)
-        self.quantity_entry = tk.Entry(self,font=("Arial",10))
-        self.quantity_entry.pack(pady=5)
+        quantitysold_label = tk.Label(self, text="Quantity Sold:",font=("Arial",14),fg="#041845")
+        quantitysold_label.pack(padx=10,pady=10)
+        self.quantity_entry = tk.Entry(self,font=("Arial",10),fg="#041845")
+        self.quantity_entry.pack(padx=10,pady=10)
         self.canvas.create_window(400, 190, window=quantitysold_label)
         self.canvas.create_window(400, 230, window=self.quantity_entry)
 
-        update_button= tk.Button(self, text="Update Inventory",font=("Arial",10), command=lambda: self.update_inventory())
-        update_button.pack(pady=10)
+        update_button= tk.Button(self, text="Update Inventory",font=("Arial",13),fg="#041845", command=lambda: self.update_inventory())
+        update_button.pack(padx=10,pady=10)
         self.canvas.create_window(400, 280, window=update_button)
 
                                                                         #instance from receptionist class and inside the
                                                                         #receptionist class we made instance from inventory class to
                                                                         #get the func display_inv from inventory class
-        view_button = tk.Button(self, text="View Inventory",font=("Arial",10), command=lambda: self.master.receptionist.inventory.display_inv())
-        view_button.pack(pady=10)
+        view_button = tk.Button(self, text="View Inventory",font=("Arial",13),fg="#041845", command=lambda: self.master.receptionist.inventory.display_inv())
+        view_button.pack(padx=10,pady=10)
         self.canvas.create_window(400, 320, window=view_button)
 
-        back_button = tk.Button(self, text="Back To Main Menu",font=("Arial",10), command=self.back_to_menu)
-        back_button.pack(pady=20)
+        back_button = tk.Button(self, text="Back To Main Menu",font=("Arial",13),fg="#041845", command=self.back_to_menu)
+        back_button.pack(padx=10,pady=10)
         self.canvas.create_window(400, 400, window=back_button)
 
 
@@ -578,30 +579,36 @@ class App(tk.Tk):
 
 
     def main_menu(self):
-        register_pet_button = tk.Button(self, text="Register Pet", command=self.registration_button)
-        register_pet_button.pack(pady=10)
-        self.canvas.create_window(400,100,window=register_pet_button)
+        label =tk.Label(self, text="Fluffy Paws Clinic and Shop",
+                      font=("Arial", 15, "bold"),
+                      fg="#f2c29b", bg="#332414", relief=RAISED, bd=15, padx=15, pady=15)
+        label.pack(padx=20,pady=20)
+        self.canvas.create_window(400, 50, window=label)
 
-        appointment_booking_button = tk.Button(self, text="Book Appointment", command=self.appointment_booking_button)
-        appointment_booking_button.pack(pady=10)
-        self.canvas.create_window(400,160,window=appointment_booking_button)
+        register_pet_button = tk.Button(self, text="Register Pet",font=("Arial",13,"bold"),fg="#f7d4b7",bg="#041845", relief=RAISED,bd=5, padx=7, pady=7, command=self.registration_button)
+        register_pet_button.pack(padx=20,pady=20)
+        self.canvas.create_window(400,130,window=register_pet_button)
 
-        save_appointments_button = tk.Button(self, text="Save Appointment",
+        appointment_booking_button = tk.Button(self, text="Book Appointment",font=("Arial",13,"bold"),fg="#f7d4b7",bg="#041845", relief=RAISED,bd=5, padx=7, pady=7, command=self.appointment_booking_button)
+        appointment_booking_button.pack(padx=20,pady=20)
+        self.canvas.create_window(400,190,window=appointment_booking_button)
+
+        save_appointments_button = tk.Button(self, text="Save Appointment",font=("Arial",13,"bold"),fg="#f7d4b7",bg="#041845", relief=RAISED,bd=5, padx=7, pady=7,
                                             command=lambda: self.receptionist.save_appointments())
-        save_appointments_button.pack(pady=10)
-        self.canvas.create_window(400, 230, window=save_appointments_button)
+        save_appointments_button.pack(padx=20,pady=20)
+        self.canvas.create_window(400, 250, window=save_appointments_button)
 
-        view_appointments_button = tk.Button(self, text="View Appointments", command=self.view_appointments_button)
-        view_appointments_button.pack(pady=10)
-        self.canvas.create_window(400, 280, window=view_appointments_button)
+        view_appointments_button = tk.Button(self, text="View Appointments",font=("Arial",13,"bold"),fg="#f7d4b7",bg="#041845", relief=RAISED,bd=5, padx=7, pady=7, command=self.view_appointments_button)
+        view_appointments_button.pack(padx=20,pady=20)
+        self.canvas.create_window(400, 310, window=view_appointments_button)
 
-        inventory_button= tk.Button(self, text="Inventory Management", command=self.inventory_button)
-        inventory_button.pack(pady=10)
-        self.canvas.create_window(400, 340, window=inventory_button)
+        inventory_button= tk.Button(self, text="Inventory Management",font=("Arial",13,"bold"),fg="#f7d4b7",bg="#041845", relief=RAISED,bd=5, padx=7, pady=7, command=self.inventory_button)
+        inventory_button.pack(padx=20,pady=20)
+        self.canvas.create_window(400, 370, window=inventory_button)
 
-        exit_button = tk.Button(self, text="Exit", command=self.quit)
-        exit_button.pack(pady=10)
-        self.canvas.create_window(400, 400, window=exit_button)
+        exit_button = tk.Button(self, text="Exit",font=("Arial",13,"bold"),fg="#f7d4b7",bg="#041845", relief=RAISED,bd=5, padx=7, pady=7, command=self.quit)
+        exit_button.pack(padx=20,pady=20)
+        self.canvas.create_window(400, 440, window=exit_button)
 
 
 
