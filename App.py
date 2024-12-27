@@ -114,6 +114,43 @@ class Receptionist:
             json.dump(appointment_data, file, indent=4)
         messagebox.showinfo("Save Successful", "Appointments have been saved successfully.")
 
+    def load_appointments(self, owners, vets):
+
+        with open("appointments.json", "r") as file:
+            appointment_data = json.load(file)
+
+                # Clear existing appointments
+            self.appointments = []
+
+            for data in appointment_data:
+                    # Find the owner
+                owner = None
+                for o in owners:
+                    if o.owner_name == data["owner_name"]:
+                        owner = o
+
+
+                    # Find the pet
+                pet = None
+                if owner:
+                    for p in owner.pets:
+                        if p.pet_name == data["pet_name"]:
+                            pet = p
+
+
+                    # Find the vet
+                vet = None
+                for v in vets:
+                    if v.vet_name == data["vet_name"]:
+                        vet = v
+
+
+                    # Add the appointment if all components are found
+                if owner and pet and vet:
+                    self.appointments.append(Appointment(owner, pet, vet, data["timeslot"]))
+
+
+
     def view_appointment(self):
         if not self.appointments:
             messagebox.showinfo("Appointment Details", "No appointments booked")
@@ -338,6 +375,8 @@ class App(tk.Tk):
         self.owner_load_data()
         self.main_menu()
         self.receptionist = Receptionist()
+        self.receptionist.load_appointments(self.owners, self.vets)  # Load appointments
+
 
     def main_menu(self):
         register_pet_button = tk.Button(self, text="Register Pet", command=self.registration_button)
@@ -348,6 +387,10 @@ class App(tk.Tk):
 
         view_appointments_button = tk.Button(self, text="View Appointments", command=self.view_appointments_button)
         view_appointments_button.pack(pady=10)
+
+        save_appointments_button = tk.Button(self, text="Save Appointments",
+                                             command=lambda: self.receptionist.save_appointments())
+        save_appointments_button.pack(pady=10)
 
     def registration_button(self):
         pet_registration(self)
