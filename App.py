@@ -4,8 +4,8 @@ from tkinter import messagebox
 import smtplib                                      #transfer sending emails from server to another
 from email.mime.text import MIMEText                #represent email body as email text
 from email.mime.multipart import MIMEMultipart      #create from: to:  message:subject
-from dotenv import load_dotenv
-import os
+from dotenv import load_dotenv                      #read key-value pairs from env file
+import os                                           #to interact with the file system
 
 load_dotenv()
 
