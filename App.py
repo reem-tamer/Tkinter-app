@@ -93,13 +93,22 @@ class Receptionist:
         messagebox.showinfo("Sucessful booking",
                             f"Appointment booked for {pet.pet_name} with {vet.vet_name} at {timeslot} ")
 
-    def view_appointment(self):  # so the receptionist is able to view the appointments everyday
-        if not self.appointments:  # if we have no appointments
+    # def view_appointment(self):  # so the receptionist is able to view the appointments everyday
+    #     if not self.appointments:  # if we have no appointments
+    #         messagebox.showinfo("Appointment Details", "No appointments booked")
+    #     else:
+    #         appointment_view = "\n".join(
+    #             [f'{appointment.pet.pet_name} with {appointment.vet.vet_name} at {appointment.timeslot}' for appointment
+    #              in self.appointments])
+    #         messagebox.showinfo("Appointment Details", appointment_view)
+    def view_appointment(self):
+        if not self.appointments:
             messagebox.showinfo("Appointment Details", "No appointments booked")
         else:
-            appointment_view = "\n".join(
-                [f'{appointment.pet.pet_name} with {appointment.vet.vet_name} at {appointment.timeslot}' for appointment
-                 in self.appointments])
+            appointment_view = "\n".join([
+                f'{appointment.pet.pet_name} (Owner: {appointment.owner.owner_name}) with {appointment.vet.vet_name} at {appointment.timeslot}'
+                for appointment in self.appointments
+            ])
             messagebox.showinfo("Appointment Details", appointment_view)
 
 
