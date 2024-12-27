@@ -162,6 +162,8 @@ class Receptionist:
             messagebox.showinfo("Appointment Details", appointment_view)
 
 
+
+
 class pet_registration(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)
@@ -196,7 +198,7 @@ class pet_registration(tk.Toplevel):
         registerbutton = tk.Button(self, text="Register Pet", command=self.register_pet)
         registerbutton.pack(pady=10)
 
-        back_button = tk.Button(self, text="Back To Main Menu", command= self.master.back_to_menu)
+        back_button = tk.Button(self, text="Back To Main Menu", command= self.back_to_menu)
         back_button.pack(pady=20)
 
 
@@ -233,6 +235,10 @@ class pet_registration(tk.Toplevel):
         owner.add_pet(pet)
         self.master.owner_save_data()  # save data in the file
         messagebox.showinfo("Register successful", f"{pet_name} is registered succesfully")
+
+    def back_to_menu (self):
+        self.destroy()            #destroy the new window
+        self.master.deiconify()   #return the main menu window
 
 
 
@@ -286,7 +292,7 @@ class AppointmentBooking(tk.Toplevel):
         booking_button = tk.Button(self, text="Book Appointment", command=self.booking_appointment)
         booking_button.pack(pady=10)
 
-        back_button = tk.Button(self, text="Back To Main Menu", command=self.master.back_to_menu)
+        back_button = tk.Button(self, text="Back To Main Menu", command=self.back_to_menu)
         back_button.pack(pady=20)
 
 
@@ -366,7 +372,9 @@ class AppointmentBooking(tk.Toplevel):
         # update the available timeslots after the appointment is booked
         self.master.receptionist.book_appointment(owner, pet, vet, selected_timeslot)
         self.update_time_slots()
-
+    def back_to_menu(self):
+        self.destroy()             #distroy the new window
+        self.master.deiconify()    #return the main menu window
 
 
 
@@ -411,7 +419,7 @@ class App(tk.Tk):
 
 
     def registration_button(self):
-        self.withdraw()
+        self.withdraw()      #hide the main menu window
         pet_registration(self)
 
     def appointment_booking_button(self):
