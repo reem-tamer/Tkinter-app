@@ -378,13 +378,28 @@ class AppointmentBooking(tk.Toplevel):
 
 
 
-#
-# class Inventory_management(tk.Toplevel):
-#     def __init__(self, master):
-#         super().__init__(master)
-#         self.title("Inventory Management")
-#         self.geometry("800x600")
-#         self.master = master
+class Inventory_management(tk.Toplevel):
+    def __init__(self, master):
+        super().__init__(master)
+        self.title("Inventory Management")
+        self.geometry("800x600")
+        self.master = master
+
+        items_label = tk.Label(self, text="Select Item:")
+        items_label.pack(pady=5)
+        self.item_choice = tk.StringVar(self)
+        self.item_menu = tk.OptionMenu(self, self.item_choice, *self.master.receptionist.inventory.items.keys())
+        self.item_menu.pack(pady=5)
+
+        quantitysold_label = tk.Label(self, text="Quantity Sold:")
+        quantitysold_label.pack(pady=5)
+        self.quantity_entry = tk.Entry(self)
+        self.quantity_entry.pack(pady=5)
+
+        update_button= tk.Button(self, text="Update Inventory", command=self.update_inventory)
+        update_button.pack(pady=10)
+        view_button = tk.Button(self, text="View Inventory", command=self.master.receptionist.inventory.display_inventory)
+        view_button.pack(pady=10)
 
 
 class App(tk.Tk):
