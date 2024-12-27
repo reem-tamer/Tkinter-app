@@ -2,7 +2,7 @@ import json
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import PhotoImage
-from PIL import Image, ImageTk
+from PIL import  Image, ImageTk
 from tkinter import Canvas
 import smtplib                                      #transfer sending emails from server to another
 from email.mime.text import MIMEText                #represent email body as email text
