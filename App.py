@@ -18,9 +18,9 @@ class Pet:
         return pet_dict
     @staticmethod
     def pet_get_dict(owner_data): # returns the dict back to a class
-        return Pet(owner_data["pet_name"],owner_data["age"],owner_data.get("vaccination_records",[]),owner_data["species"])
+        pet=Pet(owner_data["pet_name"],owner_data["age"],owner_data.get("vaccination_records",[]),owner_data["species"])
 
-
+        return pet
 class Owner:
     def __init__(self, owner_name):
         self.owner_name = owner_name
@@ -52,12 +52,12 @@ class Vet:
 
 
 class Appointment:
-    def __init__(self, owner, pet, vet, timeslot, date):
+    def __init__(self, owner, pet, vet, timeslot):
         self.owner = owner
         self.pet = pet
         self.vet = vet
         self.timeslot = timeslot
-        self.date = date
+        # self.date = date
 
 
 class Inventory:
@@ -231,9 +231,9 @@ class AppointmentBooking(tk.Toplevel):
             # this is how the pets will be removed to allow space for the new owners pets to be chosen
             self.pet_choice.set("") # if the owner selection changes this line resets the pet selection and doesnt show the previously selected pet
                                       # set deletes the pet on the choice bar
-            self.pet_menu["Menu"].delete(0,"end") # .delete removes the unwanted pets from the drag down
+            self.pet_menu["menu"].delete(0,"end") # .delete removes the unwanted pets from the drag down
             for x in pet_names:
-                self.pet_menu["Menu"].add_command(label=x , command=tk._setit(self.pet_choice,x)) # automatically updates with selected pet name when the user selects the pet from the option menu
+                self.pet_menu["menu"].add_command(label=x , command=tk._setit(self.pet_choice,x)) # automatically updates with selected pet name when the user selects the pet from the option menu
 
     def update_time_slots(self, *_):
         vet_chosen = self.vet_choice.get()
@@ -244,9 +244,9 @@ class AppointmentBooking(tk.Toplevel):
                 break
         if chosen_vet_name:
             self.timeslot_choice.set("")
-            self.timeslot_menu["Menu"].delete(0, "end")
+            self.timeslot_menu["menu"].delete(0, "end")
             for x in chosen_vet_name.available_appointments:
-                self.timeslot_menu["Menu"].add_command(label=x, command=tk._setit(self.timeslot_choice,x))
+                self.timeslot_menu["menu"].add_command(label=x, command=tk._setit(self.timeslot_choice,x))
 
     def booking_appointment(self):
         #get selected choice of everything (final choice)
@@ -302,7 +302,7 @@ class App(tk.Tk):
         self.owners = []
         self.owner_load_data()
         self.main_menu()
-
+        self.receptionist = Receptionist()
     def main_menu(self):
         register_pet_button = tk.Button(self, text="Register Pet", command=self.registration_button)
         register_pet_button.pack(pady=10)
