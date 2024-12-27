@@ -3,7 +3,6 @@ import tkinter as tk
 from tkinter import messagebox
 
 
-
 class Pet:
     def __init__(self, pet_name, age, species, vaccine_rec):
         self.pet_name = pet_name
@@ -15,13 +14,18 @@ class Pet:
         self.vaccine_rec.append(vaccine)
 
     def pet_turn_dict(self):  # turn our object to a dict so json file can handle it(save)
-        pet_dict = {"pet_name": self.pet_name, "age": self.age, "vaccination_records": self.vaccine_rec,"species":self.species}
+        pet_dict = {"pet_name": self.pet_name, "age": self.age, "vaccination_records": self.vaccine_rec,
+                    "species": self.species}
         return pet_dict
+
     @staticmethod
-    def pet_get_dict(owner_data): # returns the dict back to a class
-        pet=Pet(owner_data["pet_name"],owner_data["age"],owner_data.get("vaccination_records",[]),owner_data["species"])
+    def pet_get_dict(owner_data):  # returns the dict back to a class
+        pet = Pet(owner_data["pet_name"], owner_data["age"], owner_data.get("vaccination_records", []),
+                  owner_data["species"])
 
         return pet
+
+
 class Owner:
     def __init__(self, owner_name):
         self.owner_name = owner_name
@@ -33,14 +37,17 @@ class Owner:
     def get_pet(self):  # (not sure) get pets list when owner want to make appointment
         return self.pets
 
-    def owner_turn_dict(self):  # turns owner object to dictionary for json file and gets pet object after turning it into a dict
+    def owner_turn_dict(
+            self):  # turns owner object to dictionary for json file and gets pet object after turning it into a dict
         owner_dict = {"owner_name": self.owner_name, "pets": [pet.pet_turn_dict() for pet in self.pets]}
         return owner_dict
+
     @staticmethod
     def get_dict(owner_data):
-        owner=Owner(owner_data["owner_name"])
-        owner.pets=[Pet.pet_get_dict(pet) for pet in owner_data["pets"]]
+        owner = Owner(owner_data["owner_name"])
+        owner.pets = [Pet.pet_get_dict(pet) for pet in owner_data["pets"]]
         return owner
+
 
 class Vet:
     def __init__(self, vet_name, available_appointments):
@@ -93,14 +100,7 @@ class Receptionist:
         messagebox.showinfo("Sucessful booking",
                             f"Appointment booked for {pet.pet_name} with {vet.vet_name} at {timeslot} ")
 
-    # def view_appointment(self):  # so the receptionist is able to view the appointments everyday
-    #     if not self.appointments:  # if we have no appointments
-    #         messagebox.showinfo("Appointment Details", "No appointments booked")
-    #     else:
-    #         appointment_view = "\n".join(
-    #             [f'{appointment.pet.pet_name} with {appointment.vet.vet_name} at {appointment.timeslot}' for appointment
-    #              in self.appointments])
-    #         messagebox.showinfo("Appointment Details", appointment_view)
+
     def view_appointment(self):
         if not self.appointments:
             messagebox.showinfo("Appointment Details", "No appointments booked")
@@ -160,14 +160,11 @@ class pet_registration(tk.Toplevel):
             messagebox.showerror("Input Error", "Please enter a valid integer for the pet's age.")
             return
 
-
-
         owner = None
         for existing_owner in self.master.owners:
-            if existing_owner is not None :  #to not causes the loop to break when it tries to access owner_name becuase of none
+            if existing_owner is not None:  # to not causes the loop to break when it tries to access owner_name becuase of none
                 if existing_owner.owner_name == owner_name:
                     owner = existing_owner
-
 
         # check if the owner is in the list
         # if its not it takes the name and makes and instance of it
@@ -177,10 +174,9 @@ class pet_registration(tk.Toplevel):
             owner = Owner(owner_name)
             self.master.owners.append(owner)
 
-
         pet = Pet(pet_name, pet_age, species, vaccination_record)
         owner.add_pet(pet)
-        self.master.owner_save_data()  #save data in the file
+        self.master.owner_save_data()  # save data in the file
         messagebox.showinfo("Register successful", f"{pet_name} is registered succesfully")
 
 
@@ -192,58 +188,67 @@ class AppointmentBooking(tk.Toplevel):
         self.master = master
         print(self.master.owners)
 
-        owner_label=tk.Label(self,text="Owner Name: ")
+        owner_label = tk.Label(self, text="Owner Name: ")
         owner_label.pack(pady=5)
-        self.owner_choice= tk.StringVar(self) # when we make the drag down menu in the booking appointment window this will show which option was chosen from the drag down
+        self.owner_choice = tk.StringVar(
+            self)  # when we make the drag down menu in the booking appointment window this will show which option was chosen from the drag down
 
-        owner_list_names =  [owner.owner_name for owner in self.master.owners if owner is not None]
+        owner_list_names = [owner.owner_name for owner in self.master.owners if owner is not None]
         if not owner_list_names:
             owner_list_names = ["No Owners Available"]
-        self.owner_menu= tk.OptionMenu(self,self.owner_choice,*owner_list_names) # *args is syntactical in the menu choice to display all the owners in the list
+        self.owner_menu = tk.OptionMenu(self, self.owner_choice,
+                                        *owner_list_names)  # *args is syntactical in the menu choice to display all the owners in the list
 
         self.owner_menu.pack(pady=5)
-        self.owner_choice.trace_add("write",self.update_pet_menu) #it traces back the owner choice and gives us the chosen owners pets
+        self.owner_choice.trace_add("write",
+                                    self.update_pet_menu)  # it traces back the owner choice and gives us the chosen owners pets
 
-        pet_label= tk.Label(self,text= "Pet Name: ")
+        pet_label = tk.Label(self, text="Pet Name: ")
         pet_label.pack(pady=5)
-        self.pet_choice= tk.StringVar(self) # when we make the drag down menu in the booking appointment window this will show which option was chosen from the drag down
-        self.pet_menu= tk.OptionMenu(self,self.pet_choice,"") # the value is an empty string because this field will be empty until an owner is chosen
+        self.pet_choice = tk.StringVar(
+            self)  # when we make the drag down menu in the booking appointment window this will show which option was chosen from the drag down
+        self.pet_menu = tk.OptionMenu(self, self.pet_choice,
+                                      "")  # the value is an empty string because this field will be empty until an owner is chosen
         self.pet_menu.pack(pady=5)
 
-        vet_label=tk.Label(self,text="Vet: ")
+        vet_label = tk.Label(self, text="Vet: ")
         vet_label.pack(pady=5)
         self.vet_choice = tk.StringVar(self)
-        self.vet_menu= tk.OptionMenu(self,self.vet_choice,*[vet.vet_name for vet in self.master.vets]) #  *option menue doesnt read a list and the * so it views it as one value
+        self.vet_menu = tk.OptionMenu(self, self.vet_choice, *[vet.vet_name for vet in
+                                                               self.master.vets])  # *option menue doesnt read a list and the * so it views it as one value
         self.vet_menu.pack(pady=5)
         self.vet_choice.trace_add("write", self.update_time_slots)
 
-        timeslot_label= tk.Label(self, text= " Timeslot: ")
+        timeslot_label = tk.Label(self, text=" Timeslot: ")
         timeslot_label.pack(pady=5)
         self.timeslot_choice = tk.StringVar(self)
-        self.timeslot_menu= tk.OptionMenu(self,self.timeslot_choice,"") # the value is an empty string since the timelsots wont appear except when the vet is chosen
+        self.timeslot_menu = tk.OptionMenu(self, self.timeslot_choice,
+                                           "")  # the value is an empty string since the timelsots wont appear except when the vet is chosen
         self.timeslot_menu.pack(pady=5)
 
-        booking_button= tk.Button(self,text="Book Appointment", command= self.booking_appointment)
+        booking_button = tk.Button(self, text="Book Appointment", command=self.booking_appointment)
         booking_button.pack(pady=10)
 
-
-    def update_pet_menu(self,*_): #using args the _ it helps us ignore the rest of the unneded values lile species,age,vaccination
-        chosen_owner= self.owner_choice.get() # get the chosen owner
-        chosen_owner_name= None
+    def update_pet_menu(self,
+                        *_):  # using args the _ it helps us ignore the rest of the unneded values lile species,age,vaccination
+        chosen_owner = self.owner_choice.get()  # get the chosen owner
+        chosen_owner_name = None
         for x in self.master.owners:
-            if x.owner_name == chosen_owner: # compare the owner objects in the list of owners with the string owner choice
+            if x.owner_name == chosen_owner:  # compare the owner objects in the list of owners with the string owner choice
                 chosen_owner_name = x
-                break # for efficiency to break the loop as solon as owner is found and continue iterating
+                break  # for efficiency to break the loop as solon as owner is found and continue iterating
         if chosen_owner_name:
-            pet_names= [ pet.pet_name for pet in chosen_owner_name.pets] # getting the names of an owners pets
+            pet_names = [pet.pet_name for pet in chosen_owner_name.pets]  # getting the names of an owners pets
 
-            #if after choosing an owner wanting to change our minds and choose another one
+            # if after choosing an owner wanting to change our minds and choose another one
             # this is how the pets will be removed to allow space for the new owners pets to be chosen
-            self.pet_choice.set("") # if the owner selection changes this line resets the pet selection and doesnt show the previously selected pet
-                                      # set deletes the pet on the choice bar
-            self.pet_menu["menu"].delete(0,"end") # .delete removes the unwanted pets from the drag down
+            self.pet_choice.set(
+                "")  # if the owner selection changes this line resets the pet selection and doesnt show the previously selected pet
+            # set deletes the pet on the choice bar
+            self.pet_menu["menu"].delete(0, "end")  # .delete removes the unwanted pets from the drag down
             for x in pet_names:
-                self.pet_menu["menu"].add_command(label=x , command=tk._setit(self.pet_choice,x)) # automatically updates with selected pet name when the user selects the pet from the option menu
+                self.pet_menu["menu"].add_command(label=x, command=tk._setit(self.pet_choice,
+                                                                             x))  # automatically updates with selected pet name when the user selects the pet from the option menu
 
     def update_time_slots(self, *_):
         vet_chosen = self.vet_choice.get()
@@ -256,10 +261,10 @@ class AppointmentBooking(tk.Toplevel):
             self.timeslot_choice.set("")
             self.timeslot_menu["menu"].delete(0, "end")
             for x in chosen_vet_name.available_appointments:
-                self.timeslot_menu["menu"].add_command(label=x, command=tk._setit(self.timeslot_choice,x))
+                self.timeslot_menu["menu"].add_command(label=x, command=tk._setit(self.timeslot_choice, x))
 
     def booking_appointment(self):
-        #get selected choice of everything (final choice)
+        # get selected choice of everything (final choice)
         selected_owner = self.owner_choice.get()
         selected_pet = self.pet_choice.get()
         selected_vet = self.vet_choice.get()
@@ -273,7 +278,7 @@ class AppointmentBooking(tk.Toplevel):
                 owner = x
                 break
 
-        #After finding the owner, the code searches through
+        # After finding the owner, the code searches through
         # the owner's pets list to find the pet_name that matches the selected pet.
         pet = None
         for y in owner.pets:
@@ -287,16 +292,17 @@ class AppointmentBooking(tk.Toplevel):
                 vet = z
                 break
 
-        #finalizing the appointment and storing it with entered
+        # finalizing the appointment and storing it with entered
         # data in the func book_appointmet of receptionist class
-        self.master.receptionist.book_appointment(pet, owner, vet, selected_timeslot)
+        # self.master.receptionist.book_appointment(pet, owner, vet, selected_timeslot)
 
-        #If any of the fields are missing, it shows an error message
+        # If any of the fields are missing, it shows an error message
         if not selected_owner or not selected_pet or not selected_vet or not selected_timeslot:
             messagebox.showerror("Missing Fields", "All fields must be filled.")
             return
 
-        #update the available timeslots after the appointment is booked
+        # update the available timeslots after the appointment is booked
+        self.master.receptionist.book_appointment(owner, pet, vet, selected_timeslot)
         self.update_time_slots()
 
 
@@ -319,12 +325,13 @@ class App(tk.Tk):
         self.owner_load_data()
         self.main_menu()
         self.receptionist = Receptionist()
+
     def main_menu(self):
         register_pet_button = tk.Button(self, text="Register Pet", command=self.registration_button)
         register_pet_button.pack(pady=10)
 
         appointment_booking_button = tk.Button(self, text="Book Appointment", command=self.appointment_booking_button)
-        appointment_booking_button.pack(pady= 10)
+        appointment_booking_button.pack(pady=10)
 
         view_appointments_button = tk.Button(self, text="View Appointments", command=self.view_appointments_button)
         view_appointments_button.pack(pady=10)
@@ -342,18 +349,19 @@ class App(tk.Tk):
         with open("owner_data.json", "r") as file:
             owner_data = json.load(file)
         owner_data["owners"].extend([owner.owner_turn_dict() for owner in self.owners if owner is not None])
-#taking every owner object in the list of owners if it's not empty as  a dict and append it in the json file
-        with open("owner_data.json","w") as file:
-            json.dump(owner_data,file, indent=4)
+        # taking every owner object in the list of owners if it's not empty as  a dict and append it in the json file
+        with open("owner_data.json", "w") as file:
+            json.dump(owner_data, file, indent=4)
 
     def owner_load_data(self):
-        with open("owner_data.json","r")as file:
+        with open("owner_data.json", "r") as file:
             owner_data = json.load(file)
             cumilative_owner_list = [Owner.get_dict(owner) for owner in owner_data.get("owners")]
             self.owners.extend(cumilative_owner_list)
-            #looping over the dictionary we have of the json file
+            # looping over the dictionary we have of the json file
             # and converting it into an object using the static method get_dict in the owner class
             # and append it in the owner list
+
 
 if __name__ == "__main__":
     app = App()
