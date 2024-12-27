@@ -2,7 +2,7 @@
     "owners": [
 
         {
-            "owner_name": "Ahmed",
+            "owner_name": "Ahmed Yasser",
             "pets": [
                 {
                     "pet_name": "Alex",
@@ -17,7 +17,7 @@
             ]
         },
         {
-            "owner_name": "Sarah",
+            "owner_name": "Sarah Ali",
             "pets": [
                 {
                     "pet_name": "penny",
@@ -31,24 +31,8 @@
                     "species": "Rabbit"
                 }
             ]
-        },
-        {
-            "owner_name": "Mona Ahmed",
-            "pets": [
-                {
-                    "pet_name": "Joey",
-                    "age": 3,
-                    "vaccination_records": [
-                        "cat"
-                    ],
-                    "species": [
-                        [
-                            ""
-                        ]
-                    ]
-                }
-            ]
         }
+
 
     ]
 }
