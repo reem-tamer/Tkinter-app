@@ -519,22 +519,28 @@ class App(tk.Tk):
     def main_menu(self):
         register_pet_button = tk.Button(self, text="Register Pet", command=self.registration_button)
         register_pet_button.pack(pady=10)
+        self.canvas.create_window(400,100,window=register_pet_button)
 
         appointment_booking_button = tk.Button(self, text="Book Appointment", command=self.appointment_booking_button)
         appointment_booking_button.pack(pady=10)
+        self.canvas.create_window(400, 160, window=appointment_booking_button)
 
         save_appointments_button = tk.Button(self, text="Save Appointment",
                                             command=lambda: self.receptionist.save_appointments())
         save_appointments_button.pack(pady=10)
+        self.canvas.create_window(400, 230, window=save_appointments_button)
 
         view_appointments_button = tk.Button(self, text="View Appointments", command=self.view_appointments_button)
         view_appointments_button.pack(pady=10)
+        self.canvas.create_window(400, 280, window=view_appointments_button)
 
         inventory_button= tk.Button(self, text="Inventory Management", command=self.inventory_button)
         inventory_button.pack(pady=10)
+        self.canvas.create_window(400, 340, window=inventory_button)
 
         exit_button = tk.Button(self, text="Exit", command=self.quit)
         exit_button.pack(pady=10)
+        self.canvas.create_window(400, 400, window=exit_button)
 
 
 
