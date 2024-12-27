@@ -97,21 +97,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "owner_name": "Reem Tamer",
-            "pets": [
-                {
-                    "pet_name": "joey",
-                    "age": 5,
-                    "vaccination_records": [
-                        [
-                            "rabies"
-                        ]
-                    ],
-                    "species": "cat"
-                }
-            ]
         }
     ]
 }

@@ -74,8 +74,8 @@ class Inventory:
 
     def display_inv(self):  # put the key and value in s atring format in a list then turn the list into a string using .join
         display_inv = "\n".join([f"{k}:{v}" for k, v in self.inventory.items()])
-        messagebox.showinfo("Available Inventory", display_inv)  # put the .join string in a message box
-        print(display_inv)
+        # messagebox.showinfo("Available Inventory", display_inv)  # put the .join string in a message box
+        return display_inv
 
     def update_inv(self, item, sales):
 
@@ -396,9 +396,10 @@ class Inventory_management(tk.Toplevel):
         self.quantity_entry = tk.Entry(self)
         self.quantity_entry.pack(pady=5)
 
-        update_button= tk.Button(self, text="Update Inventory", command=self.master.receptionist.inventory.update_inv())
+        update_button= tk.Button(self, text="Update Inventory", command=self.master.receptionist.inventory.update_inv(self.item_choice.get(),self.quantity_entry.get()))
         update_button.pack(pady=10)
-        view_button = tk.Button(self, text="View Inventory", command=self.master.receptionist.inventory.view_inventory)
+
+        view_button = tk.Button(self, text="View Inventory", command=self.master.receptionist.inventory.display_inv())
         view_button.pack(pady=10)
 
 
