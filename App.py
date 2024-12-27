@@ -492,6 +492,8 @@ class App(tk.Tk):
         super().__init__()
         self.geometry("800x600")  # no instance for the window
         self.title("Fluffy Paws Clinic and Shop")
+
+
         self.vets = [Vet("DR. Ahmed Anwar", ["6:00pm", "7:00pm", "8:00pm"],"ahmed.anwer@example.com"),
                      Vet("DR. Alex Johns", ["6:00pm", "7:00pm", "8:00pm"],"alex.johns@example.com")]
         self.owners = []
