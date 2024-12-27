@@ -71,7 +71,9 @@ class Appointment:
 
 class Inventory:
     def __init__(self):
-        self.inventory = {"Food": 100, "Grooming tools": 50, "Medications": 150, "Pet toys": 30, "Pet clothes": 20}
+        #self.inventory = {"Food": 100, "Grooming tools": 50, "Medications": 150, "Pet toys": 30, "Pet clothes": 20}
+
+        self.inventory= self.load_inv()
 
     def display_inv(self):  # put the key and value in s atring format in a list then turn the list into a string using .join
         display_inv = "\n".join([f"{k}:{v}" for k, v in self.inventory.items()])
@@ -87,7 +89,6 @@ class Inventory:
             return json.load(file)
 
     def update_inv(self, item, sales):
-
         for key, value in self.inventory.items():
             if item == key:
                 if sales <= value:
