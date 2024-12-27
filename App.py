@@ -88,6 +88,7 @@ class Inventory:
                     messagebox.showerror("Error", "Invalid sales amount, please revise")
 
 
+
 class Receptionist:
     def __init__(self):
         self.appointments = []
@@ -444,7 +445,7 @@ class App(tk.Tk):
         AppointmentBooking(self)
 
     def view_appointments_button(self):
-        self.withdraw()
+        # self.withdraw()
         self.receptionist.view_appointment()
 
     def inventory_button(self):
