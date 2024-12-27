@@ -467,7 +467,6 @@ class App(tk.Tk):
 
 
 
-
     def registration_button(self):
         self.withdraw()      #hide the main menu window
         pet_registration(self)
