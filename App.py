@@ -425,6 +425,7 @@ class Inventory_management(tk.Toplevel):
         back_button = tk.Button(self, text="Back To Main Menu", command=self.back_to_menu)
         back_button.pack(pady=20)
 
+
     def update_inventory(self):
         try:
             item = self.item_choice.get()
