@@ -494,7 +494,7 @@ class App(tk.Tk):
     def __init__(self):
 
         super().__init__()
-        self.geometry("800x600")  # no instance for the window
+        self.geometry("800x670")  # no instance for the window
         self.title("Fluffy Paws Clinic and Shop")
 
         self.background_image_path = "Wallpaper.png"  # Replace with your image file path
