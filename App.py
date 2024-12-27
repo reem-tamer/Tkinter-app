@@ -86,8 +86,8 @@ class Receptionist:
         self.appointments = []
         self.inventory = Inventory()
 
-    def book_appointment(self, pet, owner, vet, timeslot):
-        appointment = Appointment(pet, owner, vet, timeslot)
+    def book_appointment(self, owner, pet, vet, timeslot):
+        appointment = Appointment(owner, pet, vet, timeslot)
         self.appointments.append(appointment)  # appends the instance of class appointment in the appointments list
         vet.available_appointments.remove(timeslot)  # removes the taken timeslot from the vets available time slots
         messagebox.showinfo("Sucessful booking",
