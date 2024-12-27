@@ -191,7 +191,7 @@ class pet_registration(tk.Toplevel):
         owner.add_pet(pet)
         self.master.owner_save_data()  # save data in the file
         messagebox.showinfo("Register successful", f"{pet_name} is registered succesfully")
-
+        self.destroy()
 
 class AppointmentBooking(tk.Toplevel):
     def __init__(self, master):
