@@ -494,7 +494,6 @@ class Inventory_management(tk.Toplevel):
 
 class App(tk.Tk):
     def __init__(self):
-
         super().__init__()
         self.geometry("800x670")  # no instance for the window
         self.title("Fluffy Paws Clinic and Shop")
