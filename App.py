@@ -388,7 +388,7 @@ class Inventory_management(tk.Toplevel):
         items_label = tk.Label(self, text="Select Item:")
         items_label.pack(pady=5)
         self.item_choice = tk.StringVar(self)
-        self.item_menu = tk.OptionMenu(self, self.item_choice, *self.master.receptionist.inventory.items.keys())
+        self.item_menu = tk.OptionMenu(self, self.item_choice, *self.master.receptionist.inventory.inventory.keys())
         self.item_menu.pack(pady=5)
 
         quantitysold_label = tk.Label(self, text="Quantity Sold:")
