@@ -398,7 +398,7 @@ class Inventory_management(tk.Toplevel):
 
         update_button= tk.Button(self, text="Update Inventory", command=self.update_inventory)
         update_button.pack(pady=10)
-        view_button = tk.Button(self, text="View Inventory", command=self.master.receptionist.inventory.display_inventory)
+        view_button = tk.Button(self, text="View Inventory", command=self.master.receptionist.inventory.view_inventory)
         view_button.pack(pady=10)
 
 
