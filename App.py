@@ -496,10 +496,12 @@ class App(tk.Tk):
         self.geometry("800x600")  # no instance for the window
         self.title("Fluffy Paws Clinic and Shop")
 
-        canvas= Canvas(self,width="800", height="600")
-        canvas.pack(fill="both",expand=True)
-        background= PhotoImage(file="Wallpaper.png")
-        bg= canvas.create_image(0,0,image=background,anchor="nw")
+        background_image_path = "Wallpaper.png"  # Replace with your image file path
+        background_image = Image.open(background_image_path)
+        background_photo = ImageTk.PhotoImage(background_image)
+        canvas = tk.Canvas(self, width=800, height=600)
+        canvas.pack(fill="both", expand=True)
+        canvas.create_image(0, 0, anchor="nw", image=background_photo)
 
         icon= PhotoImage(file="pet_icon.png")
         self.iconphoto(True,icon)
