@@ -2,7 +2,7 @@ import json
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import PhotoImage
-from PIL import  Image, ImageTk
+from PIL import Image, ImageTk
 from tkinter import Canvas
 import smtplib                                      #transfer sending emails from server to another
 from email.mime.text import MIMEText                #represent email body as email text
@@ -497,12 +497,12 @@ class App(tk.Tk):
         self.geometry("800x600")  # no instance for the window
         self.title("Fluffy Paws Clinic and Shop")
 
-        background_image_path = "Wallpaper.png"  # Replace with your image file path
-        background_image = Image.open(background_image_path)
-        background_photo = ImageTk.PhotoImage(background_image)
-        canvas = tk.Canvas(self, width=800, height=600)
-        canvas.pack(fill="both", expand=True)
-        canvas.create_image(0, 0, anchor="nw", image=background_photo)
+        self.background_image_path = "Wallpaper.png"  # Replace with your image file path
+        self.background_image = Image.open(self.background_image_path)
+        self.background_photo = ImageTk.PhotoImage(self.background_image)
+        self.canvas = tk.Canvas(self, width=800, height=600)
+        self.canvas.pack(fill="both", expand=True)
+        self.canvas.create_image(0, 0, anchor="nw", image=self.background_photo)
 
         icon= PhotoImage(file="pet_icon.png")
         self.iconphoto(True,icon)
