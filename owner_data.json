@@ -29,6 +29,22 @@
                     "species": "Dog"
                 }
             ]
+        },
+        {
+            "owner_name": "Sarah",
+            "pets": [
+                {
+                    "pet_name": "penny",
+                    "age": 2,
+                    "vaccination_records": [
+                        [
+                            "one",
+                            "two"
+                        ]
+                    ],
+                    "species": "Rabbit"
+                }
+            ]
         }
     ]
 }

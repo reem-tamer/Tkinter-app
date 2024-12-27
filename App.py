@@ -196,6 +196,11 @@ class pet_registration(tk.Toplevel):
         registerbutton = tk.Button(self, text="Register Pet", command=self.register_pet)
         registerbutton.pack(pady=10)
 
+        back_button = tk.Button(self, text="Back To Main Menu", command= self.master.back_to_menu)
+        back_button.pack(pady=20)
+
+
+
     def register_pet(self):
         owner_name = self.owner_box.get()
         pet_name = self.pet_box.get()
@@ -228,7 +233,9 @@ class pet_registration(tk.Toplevel):
         owner.add_pet(pet)
         self.master.owner_save_data()  # save data in the file
         messagebox.showinfo("Register successful", f"{pet_name} is registered succesfully")
-        self.destroy()
+
+
+
 
 class AppointmentBooking(tk.Toplevel):
     def __init__(self, master):
@@ -279,9 +286,10 @@ class AppointmentBooking(tk.Toplevel):
         booking_button = tk.Button(self, text="Book Appointment", command=self.booking_appointment)
         booking_button.pack(pady=10)
 
-        save_appointments_button = tk.Button(self, text="Save Appointments",
-                                             command=lambda: self.receptionist.save_appointments())
-        save_appointments_button.pack(pady=10)
+        back_button = tk.Button(self, text="Back To Main Menu", command=self.master.back_to_menu)
+        back_button.pack(pady=20)
+
+
 
     def update_pet_menu(self,
                         *_):  # using args the _ it helps us ignore the rest of the unneded values lile species,age,vaccination
@@ -360,12 +368,15 @@ class AppointmentBooking(tk.Toplevel):
         self.update_time_slots()
 
 
-class InventoryManagementWindow(tk.Toplevel):
-    def __init__(self, master):
-        super().__init__(master)
-        self.title("Inventory Management")
-        self.geometry("800x600")
-        self.master = master
+
+
+#
+# class Inventory_management(tk.Toplevel):
+#     def __init__(self, master):
+#         super().__init__(master)
+#         self.title("Inventory Management")
+#         self.geometry("800x600")
+#         self.master = master
 
 
 class App(tk.Tk):
@@ -389,20 +400,26 @@ class App(tk.Tk):
         appointment_booking_button = tk.Button(self, text="Book Appointment", command=self.appointment_booking_button)
         appointment_booking_button.pack(pady=10)
 
+        save_appointments_button = tk.Button(self, text="Save Appointment",
+                                            command=lambda: self.receptionist.save_appointments())
+        save_appointments_button.pack(pady=10)
+
         view_appointments_button = tk.Button(self, text="View Appointments", command=self.view_appointments_button)
         view_appointments_button.pack(pady=10)
 
-        # save_appointments_button = tk.Button(self, text="Save Appointments",
-        #                                      command=lambda: self.receptionist.save_appointments())
-        # save_appointments_button.pack(pady=10)
+
+
 
     def registration_button(self):
+        self.withdraw()
         pet_registration(self)
 
     def appointment_booking_button(self):
+        self.withdraw()
         AppointmentBooking(self)
 
     def view_appointments_button(self):
+        self.withdraw()
         self.receptionist.view_appointment()
 
     def owner_save_data(self):
@@ -421,6 +438,9 @@ class App(tk.Tk):
             # looping over the dictionary we have of the json file
             # and converting it into an object using the static method get_dict in the owner class
             # and append it in the owner list
+
+
+
 
 
 if __name__ == "__main__":
