@@ -99,14 +99,27 @@ class Receptionist:
         vet.available_appointments.remove(timeslot)  # removes the taken timeslot from the vets available time slots
         messagebox.showinfo("Sucessful booking",
                             f"Appointment booked for {pet.pet_name} with {vet.vet_name} at {timeslot} ")
-
+    def save_appointments(self):
+        # Save appointments to JSON
+        appointment_data = [
+            {
+                "owner_name": appointment.owner.owner_name,
+                "pet_name": appointment.pet.pet_name,
+                "vet_name": appointment.vet.vet_name,
+                "timeslot": appointment.timeslot,
+            }
+            for appointment in self.appointments
+        ]
+        with open("appointments.json", "w") as file:
+            json.dump(appointment_data, file, indent=4)
+        messagebox.showinfo("Save Successful", "Appointments have been saved successfully.")
 
     def view_appointment(self):
         if not self.appointments:
             messagebox.showinfo("Appointment Details", "No appointments booked")
         else:
             appointment_view = "\n".join([
-                f'{appointment.pet.pet_name} (Owner: {appointment.owner.owner_name}) with {appointment.vet.vet_name} at {appointment.timeslot}'
+                f'Appointment for {appointment.pet.pet_name} (Owner: {appointment.owner.owner_name}) with {appointment.vet.vet_name} at {appointment.timeslot}'
                 for appointment in self.appointments
             ])
             messagebox.showinfo("Appointment Details", appointment_view)
