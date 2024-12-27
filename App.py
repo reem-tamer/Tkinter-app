@@ -453,6 +453,7 @@ class App(tk.Tk):
         Inventory_management(self)
 
 
+
     def owner_save_data(self):
         with open("owner_data.json", "r") as file:
             owner_data = json.load(file)
