@@ -460,28 +460,43 @@ class Inventory_management(tk.Toplevel):
         self.geometry("800x670")
         self.master = master
 
+        self.background_image_path = "Wallpaper.png"  # Replace with your image file path
+        self.background_image = Image.open(self.background_image_path)
+        self.background_photo = ImageTk.PhotoImage(self.background_image)
+        self.canvas = tk.Canvas(self, width=800, height=670)
+        self.canvas.pack(fill="both", expand=True)
+        self.canvas.create_image(0, 0, anchor="nw", image=self.background_photo)
+
         items_label = tk.Label(self, text="Select Item:")
         items_label.pack(pady=5)
         self.item_choice = tk.StringVar(self)
         self.item_menu = tk.OptionMenu(self, self.item_choice, *self.master.receptionist.inventory.inventory.keys())
         self.item_menu.pack(pady=5)
+        self.canvas.create_window(400, 100, window=items_label)
+        self.canvas.create_window(400, 140, window=self.item_menu)
+
 
         quantitysold_label = tk.Label(self, text="Quantity Sold:")
         quantitysold_label.pack(pady=5)
         self.quantity_entry = tk.Entry(self)
         self.quantity_entry.pack(pady=5)
+        self.canvas.create_window(400, 190, window=quantitysold_label)
+        self.canvas.create_window(400, 230, window=self.quantity_entry)
 
         update_button= tk.Button(self, text="Update Inventory", command=lambda: self.update_inventory())
         update_button.pack(pady=10)
+        self.canvas.create_window(400, 280, window=update_button)
 
                                                                         #instance from receptionist class and inside the
                                                                         #receptionist class we made instance from inventory class to
                                                                         #get the func display_inv from inventory class
         view_button = tk.Button(self, text="View Inventory", command=lambda: self.master.receptionist.inventory.display_inv())
         view_button.pack(pady=10)
+        self.canvas.create_window(400, 320, window=view_button)
 
         back_button = tk.Button(self, text="Back To Main Menu", command=self.back_to_menu)
         back_button.pack(pady=20)
+        self.canvas.create_window(400, 400, window=back_button)
 
 
     def update_inventory(self):
