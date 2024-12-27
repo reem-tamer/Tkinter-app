@@ -279,6 +279,10 @@ class AppointmentBooking(tk.Toplevel):
         booking_button = tk.Button(self, text="Book Appointment", command=self.booking_appointment)
         booking_button.pack(pady=10)
 
+        save_appointments_button = tk.Button(self, text="Save Appointments",
+                                             command=lambda: self.receptionist.save_appointments())
+        save_appointments_button.pack(pady=10)
+
     def update_pet_menu(self,
                         *_):  # using args the _ it helps us ignore the rest of the unneded values lile species,age,vaccination
         chosen_owner = self.owner_choice.get()  # get the chosen owner
@@ -388,9 +392,9 @@ class App(tk.Tk):
         view_appointments_button = tk.Button(self, text="View Appointments", command=self.view_appointments_button)
         view_appointments_button.pack(pady=10)
 
-        save_appointments_button = tk.Button(self, text="Save Appointments",
-                                             command=lambda: self.receptionist.save_appointments())
-        save_appointments_button.pack(pady=10)
+        # save_appointments_button = tk.Button(self, text="Save Appointments",
+        #                                      command=lambda: self.receptionist.save_appointments())
+        # save_appointments_button.pack(pady=10)
 
     def registration_button(self):
         pet_registration(self)
