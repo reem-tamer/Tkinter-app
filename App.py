@@ -1,6 +1,13 @@
 import json
 import tkinter as tk
 from tkinter import messagebox
+import smtplib                                      #transfer sending emails from server to another
+from email.mime.text import MIMEText                #represent email body as email text
+from email.mime.multipart import MIMEMultipart      #create from: to:  message:subject
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 class Pet:
@@ -50,14 +57,10 @@ class Owner:
 
 
 class Vet:
-    def __init__(self, vet_name, available_appointments):
+    def __init__(self, vet_name, available_appointments,email):
         self.vet_name = vet_name
         self.available_appointments = available_appointments
-        # self.appointments=[]
-
-    # def add_appointments(self,appointment):
-    #     self.appointments.append(appointment) #if there is time add a view appointment feature
-
+        self.email = email
 
 
 class Appointment:
@@ -66,19 +69,17 @@ class Appointment:
         self.pet = pet
         self.vet = vet
         self.timeslot = timeslot
-        # self.date = date
+
 
 
 class Inventory:
     def __init__(self):
-        #self.inventory = {"Food": 100, "Grooming tools": 50, "Medications": 150, "Pet toys": 30, "Pet clothes": 20}
-
         self.inventory= self.load_inv()
 
     def display_inv(self):  # put the key and value in s atring format in a list then turn the list into a string using .join
         display_inv = "\n".join([f"{k}:{v}" for k, v in self.inventory.items()])
         messagebox.showinfo("Available Inventory", display_inv)  # put the .join string in a message box
-        #return display_inv
+
 
     def save_inv(self):
         with open("inventory.json", "w") as file:
@@ -98,10 +99,6 @@ class Inventory:
 
                 else:
                     messagebox.showerror("Error", "Invalid sales amount, please revise")
-
-
-
-
 
 
 
@@ -389,6 +386,16 @@ class AppointmentBooking(tk.Toplevel):
         # update the available timeslots after the appointment is booked
         self.master.receptionist.book_appointment(owner, pet, vet, selected_timeslot)
         self.update_time_slots()
+        self.send_email_notification(pet.pet_name,owner.owner_name,selected_timeslot)
+
+    def send_email_notification (self,pet_name,owner_name,timeslot):
+        try:
+            email_host = "smtp.gmail.com"    #server
+            email_port = 587                 #standard port for sending email
+
+
+
+
     def back_to_menu(self):
         self.destroy()             #distroy the new window
         self.master.deiconify()    #return the main menu window
@@ -445,8 +452,8 @@ class App(tk.Tk):
         super().__init__()
         self.geometry("800x600")  # no instance for the window
         self.title("Fluffy Paws Clinic and Shop")
-        self.vets = [Vet("DR. Ahmed Anwar", ["6:00pm", "7:00pm", "8:00pm"]),
-                     Vet("DR. Alex Johns", ["6:00pm", "7:00pm", "8:00pm"])]
+        self.vets = [Vet("DR. Ahmed Anwar", ["6:00pm", "7:00pm", "8:00pm"],"ahmed.anwer@example.com"),
+                     Vet("DR. Alex Johns", ["6:00pm", "7:00pm", "8:00pm"],"alex.johns@example.com")]
         self.owners = []
         self.owner_load_data()
         self.main_menu()
