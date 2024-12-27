@@ -292,6 +292,13 @@ class AppointmentBooking(tk.Toplevel):
 
 
 
+class InventoryManagementWindow(tk.Toplevel):
+    def __init__(self, master):
+        super().__init__(master)
+        self.title("Inventory Management")
+        self.geometry("800x600")
+        self.master = master
+
 
 class App(tk.Tk):
     def __init__(self):
