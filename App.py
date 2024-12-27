@@ -461,6 +461,10 @@ class App(tk.Tk):
         inventory_button= tk.Button(self, text="Inventory Management", command=self.inventory_button)
         inventory_button.pack(pady=10)
 
+        exit_button = tk.Button(self, text="Exit", command=self.quit)
+        exit_button.pack(pady=10)
+
+
 
 
     def registration_button(self):
