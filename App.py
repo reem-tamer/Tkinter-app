@@ -585,28 +585,28 @@ class App(tk.Tk):
         label.pack(padx=20,pady=20)
         self.canvas.create_window(400, 50, window=label)
 
-        register_pet_button = tk.Button(self, text="Register Pet",font=("Arial",13,"bold"),fg="#f7d4b7",bg="#041845", relief=RAISED,bd=5, padx=7, pady=7, command=self.registration_button)
+        register_pet_button = tk.Button(self, text="Register Pet",font=("Arial",13,"bold"),fg="black",bg="#f7d4b7", relief=RAISED,bd=5, padx=7, pady=7, command=self.registration_button)
         register_pet_button.pack(padx=20,pady=20)
         self.canvas.create_window(400,130,window=register_pet_button)
 
-        appointment_booking_button = tk.Button(self, text="Book Appointment",font=("Arial",13,"bold"),fg="#f7d4b7",bg="#041845", relief=RAISED,bd=5, padx=7, pady=7, command=self.appointment_booking_button)
+        appointment_booking_button = tk.Button(self, text="Book Appointment",font=("Arial",13,"bold"),fg="black",bg="#f7d4b7", relief=RAISED,bd=5, padx=7, pady=7, command=self.appointment_booking_button)
         appointment_booking_button.pack(padx=20,pady=20)
         self.canvas.create_window(400,190,window=appointment_booking_button)
 
-        save_appointments_button = tk.Button(self, text="Save Appointment",font=("Arial",13,"bold"),fg="#f7d4b7",bg="#041845", relief=RAISED,bd=5, padx=7, pady=7,
+        save_appointments_button = tk.Button(self, text="Save Appointment",font=("Arial",13,"bold"),fg="black",bg="#f7d4b7", relief=RAISED,bd=5, padx=7, pady=7,
                                             command=lambda: self.receptionist.save_appointments())
         save_appointments_button.pack(padx=20,pady=20)
         self.canvas.create_window(400, 250, window=save_appointments_button)
 
-        view_appointments_button = tk.Button(self, text="View Appointments",font=("Arial",13,"bold"),fg="#f7d4b7",bg="#041845", relief=RAISED,bd=5, padx=7, pady=7, command=self.view_appointments_button)
+        view_appointments_button = tk.Button(self, text="View Appointments",font=("Arial",13,"bold"),fg="black",bg="#f7d4b7", relief=RAISED,bd=5, padx=7, pady=7, command=self.view_appointments_button)
         view_appointments_button.pack(padx=20,pady=20)
         self.canvas.create_window(400, 310, window=view_appointments_button)
 
-        inventory_button= tk.Button(self, text="Inventory Management",font=("Arial",13,"bold"),fg="#f7d4b7",bg="#041845", relief=RAISED,bd=5, padx=7, pady=7, command=self.inventory_button)
+        inventory_button= tk.Button(self, text="Inventory Management",font=("Arial",13,"bold"),fg="black",bg="#f7d4b7", relief=RAISED,bd=5, padx=7, pady=7, command=self.inventory_button)
         inventory_button.pack(padx=20,pady=20)
         self.canvas.create_window(400, 370, window=inventory_button)
 
-        exit_button = tk.Button(self, text="Exit",font=("Arial",13,"bold"),fg="#f7d4b7",bg="#041845", relief=RAISED,bd=5, padx=7, pady=7, command=self.quit)
+        exit_button = tk.Button(self, text="Exit",font=("Arial",13,"bold"),fg="black",bg="#f7d4b7", relief=RAISED,bd=5, padx=7, pady=7, command=self.quit)
         exit_button.pack(padx=20,pady=20)
         self.canvas.create_window(400, 440, window=exit_button)
 
