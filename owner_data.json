@@ -1,20 +1,6 @@
 {
     "owners": [
-        {
-            "owner_name": "Mona",
-            "pets": [
-                {
-                    "pet_name": "lolo",
-                    "age": 3,
-                    "vaccination_records": [
-                        [
-                            ""
-                        ]
-                    ],
-                    "species": "cat"
-                }
-            ]
-        },
+
         {
             "owner_name": "Ahmed",
             "pets": [
@@ -47,10 +33,10 @@
             ]
         },
         {
-            "owner_name": "Mona",
+            "owner_name": "Mona Ahmed",
             "pets": [
                 {
-                    "pet_name": "lolo",
+                    "pet_name": "Joey",
                     "age": 3,
                     "vaccination_records": [
                         "cat"
@@ -62,41 +48,7 @@
                     ]
                 }
             ]
-        },
-        {
-            "owner_name": "Ahmed",
-            "pets": [
-                {
-                    "pet_name": "Alex",
-                    "age": 4,
-                    "vaccination_records": [
-                        "Dog"
-                    ],
-                    "species": [
-                        [
-                            "one"
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "owner_name": "Sarah",
-            "pets": [
-                {
-                    "pet_name": "penny",
-                    "age": 2,
-                    "vaccination_records": [
-                        "Rabbit"
-                    ],
-                    "species": [
-                        [
-                            "one",
-                            "two"
-                        ]
-                    ]
-                }
-            ]
         }
+
     ]
 }
