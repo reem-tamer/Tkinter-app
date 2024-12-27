@@ -10,7 +10,14 @@ from email.mime.text import MIMEText                #represent email body as ema
 from email.mime.multipart import MIMEMultipart      #create from: to:  message:subject
 from dotenv import load_dotenv                      #read key-value pairs from env file
 import os                                           #to interact with the file system
-
+#possible colors
+#FFD7D7 (Light Pink)
+#FFF1F0 (Soft Peach)
+#FFA7A6 (Coral Pink)
+#FEDCDB (Muted Pink)
+#D4E0EE (Pale Blue)
+#FFFBF0 (floral white)
+#E6D5FF"  ( Lavender )
 load_dotenv()
 
 
@@ -450,7 +457,7 @@ class Inventory_management(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)
         self.title("Inventory Management")
-        self.geometry("800x600")
+        self.geometry("800x670")
         self.master = master
 
         items_label = tk.Label(self, text="Select Item:")
@@ -491,8 +498,6 @@ class Inventory_management(tk.Toplevel):
 
 
 
-
-
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -525,7 +530,7 @@ class App(tk.Tk):
 
         appointment_booking_button = tk.Button(self, text="Book Appointment", command=self.appointment_booking_button)
         appointment_booking_button.pack(pady=10)
-        self.canvas.create_window(400, 160, window=appointment_booking_button)
+        self.canvas.create_window(400,160,window=appointment_booking_button)
 
         save_appointments_button = tk.Button(self, text="Save Appointment",
                                             command=lambda: self.receptionist.save_appointments())
@@ -580,6 +585,8 @@ class App(tk.Tk):
             # looping over the dictionary we have of the json file
             # and converting it into an object using the static method get_dict in the owner class
             # and append it in the owner list
+
+
 
 
 
