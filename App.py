@@ -430,6 +430,8 @@ class App(tk.Tk):
         view_appointments_button = tk.Button(self, text="View Appointments", command=self.view_appointments_button)
         view_appointments_button.pack(pady=10)
 
+        inventory_button= tk.Button(self, text="Inventory Management", command=self.inventory_button)
+        inventory_button.pack(pady=10)
 
 
 
@@ -444,6 +446,11 @@ class App(tk.Tk):
     def view_appointments_button(self):
         self.withdraw()
         self.receptionist.view_appointment()
+
+    def inventory_button(self):
+        self.withdraw()
+        Inventory_management(self)
+
 
     def owner_save_data(self):
         with open("owner_data.json", "r") as file:
