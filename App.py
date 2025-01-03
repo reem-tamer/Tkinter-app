@@ -10,21 +10,10 @@ from email.mime.text import MIMEText                #represent email body as ema
 from email.mime.multipart import MIMEMultipart      #create from: to:  message:subject
 from dotenv import load_dotenv                      #read key-value pairs from env file
 import os                                           #to interact with the file system
-#hii noraaaaaaa
 
 
-#possible colors
-#FFD7D7 (Light Pink)
-#FFF1F0 (Soft Peach)
-#FFA7A6 (Coral Pink)
-#FEDCDB (Muted Pink)
-#D4E0EE (Pale Blue)
-#FFFBF0 (floral white)
-#E6D5FF"  ( Lavender )
 
-color1 = "#020f12"
-color2 = "#05d7ff"
-color3 = "#65e7ff"
+
 
 load_dotenv()
 
