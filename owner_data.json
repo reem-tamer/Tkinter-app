@@ -32,41 +32,6 @@
             ]
         },
         {
-            "owner_name": "Ahmed Yasser",
-            "pets": [
-                {
-                    "pet_name": "Alex",
-                    "age": 4,
-                    "vaccination_records": [
-                        "Dog"
-                    ],
-                    "species": [
-                        [
-                            "Canine Influenza"
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "owner_name": "Sarah Ali",
-            "pets": [
-                {
-                    "pet_name": "Penny",
-                    "age": 2,
-                    "vaccination_records": [
-                        "Dog"
-                    ],
-                    "species": [
-                        [
-                            "Parvo",
-                            "Lime disease"
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
             "owner_name": "Ibrahim Ahmed",
             "pets": [
                 {
