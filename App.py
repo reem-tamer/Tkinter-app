@@ -11,10 +11,6 @@ from email.mime.multipart import MIMEMultipart      #create from: to:  message:s
 from dotenv import load_dotenv                      #read key-value pairs from env file
 import os                                           #to interact with the file system
 
-
-
-
-
 load_dotenv()
 
 

@@ -30,41 +30,6 @@
                     "species": "Rabbit"
                 }
             ]
-        },
-        {
-            "owner_name": "Ahmed Yasser",
-            "pets": [
-                {
-                    "pet_name": "Alex",
-                    "age": 4,
-                    "vaccination_records": [
-                        "Dog"
-                    ],
-                    "species": [
-                        [
-                            "one"
-                        ]
-                    ]
-                }
-            ]
-        },
-        {
-            "owner_name": "Sarah Ali",
-            "pets": [
-                {
-                    "pet_name": "Max",
-                    "age": 2,
-                    "vaccination_records": [
-                        "Dog"
-                    ],
-                    "species": [
-                        [
-                            "one",
-                            "two"
-                        ]
-                    ]
-                }
-            ]
         }
 
     ]
