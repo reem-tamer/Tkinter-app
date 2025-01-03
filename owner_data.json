@@ -19,7 +19,7 @@
             "owner_name": "Sarah Ali",
             "pets": [
                 {
-                    "pet_name": "penny",
+                    "pet_name": "Penny",
                     "age": 2,
                     "vaccination_records": [
                         [
@@ -52,10 +52,10 @@
             "owner_name": "Sarah Ali",
             "pets": [
                 {
-                    "pet_name": "penny",
+                    "pet_name": "Max",
                     "age": 2,
                     "vaccination_records": [
-                        "Rabbit"
+                        "Dog"
                     ],
                     "species": [
                         [
